@@ -59,7 +59,7 @@ public class EmailNotificationService {
         String username = "isicju@gmail.com";
         String password = "MjHqfCWBKh63W12Ognw5aM4XzR";
 
-        String phone = "79681907742";
+        String phone = "";
         String message = "testfromjavacourse";
         RestTemplate restTemplate = new RestTemplate();
 
