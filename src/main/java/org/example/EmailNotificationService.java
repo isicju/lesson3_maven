@@ -24,8 +24,8 @@ import java.nio.charset.Charset;
 public class EmailNotificationService {
 
     public static void main1(String[] args) {
-        String name = "53ffc361c9d9692e9060ef89c18f1c11";
-        String password = "47db15682b550bdf44e2609e94c0dd4a";
+        String name = "";//v telege
+        String password = "";//v telege
 
         String recipient = "isicju@gmail.com";
         String textMessage = "kekekek";
@@ -56,8 +56,8 @@ public class EmailNotificationService {
     }
 
     public static void main(String[] args) {
-        String username = "isicju@gmail.com";
-        String password = "MjHqfCWBKh63W12Ognw5aM4XzR";
+        String username = "";//smotrite v telege
+        String password = "";//smotrite v telege
 
         String phone = "";
         String message = "testfromjavacourse";
