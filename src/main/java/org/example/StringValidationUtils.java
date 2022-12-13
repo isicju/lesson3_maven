@@ -10,6 +10,10 @@ public class StringValidationUtils {
             Pattern.compile("^[0-9]*$", Pattern.CASE_INSENSITIVE);
     private static final Pattern VALID_A_Z =
             Pattern.compile("^[a-zA-Z]*$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern VALID_CIS_CODE =
+            Pattern.compile("^(994|374|375|7|996|373|992|993|998|380)[0-9]*$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern VALID_GMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+(@gmail\\.com)$", Pattern.CASE_INSENSITIVE);
 
     public static boolean isValidEmail(String email) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
@@ -27,6 +31,16 @@ public class StringValidationUtils {
 
     public static boolean hasOnlyChars(String someString) {
         Matcher matcher = VALID_A_Z.matcher(someString);
+        return matcher.find();
+    }
+
+    public static boolean hasCisCode(String digit) {
+        Matcher matcher = VALID_CIS_CODE.matcher(digit);
+        return matcher.find();
+    }
+
+    public static boolean isValidGmail(String email) {
+        Matcher matcher = VALID_GMAIL_ADDRESS_REGEX.matcher(email);
         return matcher.find();
     }
 

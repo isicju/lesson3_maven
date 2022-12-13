@@ -2,6 +2,7 @@ package org.example.model;
 
 import static org.example.StringValidationUtils.hasLengthMoreThan;
 import static org.example.StringValidationUtils.isValidEmail;
+import static org.example.StringValidationUtils.isValidGmail;
 
 public class EmailMessage {
     private final String email;
@@ -18,6 +19,9 @@ public class EmailMessage {
     public EmailMessage(String email, String textMessage) {
         if (!isValidEmail(email)) {
             throw new RuntimeException("email: " + email + " is invalid!");
+        }
+        if (!isValidGmail(email)) {
+            throw new RuntimeException("email domain: " + email + " is not allowed!");
         }
         if (!hasLengthMoreThan(textMessage, 3)) {
             throw new RuntimeException("message text: " + textMessage + " is invalid!");
