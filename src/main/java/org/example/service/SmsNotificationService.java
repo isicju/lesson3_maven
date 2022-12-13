@@ -1,17 +1,19 @@
 package org.example.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.charset.Charset;
 
-import static org.example.StringValidationUtils.hasLengthMoreThan;
-import static org.example.StringValidationUtils.hasOnlyDigits;
+import static org.example.StringValidationUtils.*;
 
-public class SmsNotificationService implements NotificationService{
+public class SmsNotificationService implements NotificationService {
     private final static String SMS_URL_PROVIDER = "https://gate.smsaero.ru/v2/sms/send";
     private final static int SMS_TEXT_MESSAGE_MIN_LENGTH = 3;
 
@@ -24,6 +26,18 @@ public class SmsNotificationService implements NotificationService{
 
     @Override
     public void sendMessage(String phone, String text) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        SmsBody body = new SmsBody(phone, text);
+        try {
+            objectMapper.writeValue(new File("src/main/java/org/example/jsonsGenerated/smsBodyJson.json"), body);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        HttpEntity<String> request = new HttpEntity<>("src/main/java/org/example/jsonsGenerated/smsBodyJson.json", securityHeaders);
+        restTemplate.postForObject(SMS_URL_PROVIDER, request, String.class);
+    }
+
+    /* public void sendMessage(String phone, String text) {
         SmsBody body = new SmsBody(phone, text);
 
         Gson gson = new Gson();
@@ -32,6 +46,7 @@ public class SmsNotificationService implements NotificationService{
         HttpEntity<String> request = new HttpEntity<>(validJson, securityHeaders);
         restTemplate.postForObject(SMS_URL_PROVIDER, request, String.class);
     }
+    */
 
     private HttpHeaders buildSecurityHeaders(String userName, String password) {
         return new HttpHeaders() {{
@@ -49,11 +64,14 @@ public class SmsNotificationService implements NotificationService{
         String sign = "SMS Aero";
 
         public SmsBody(String number, String text) {
-            if (!hasOnlyDigits(number)) {
+            if (!hasOnlyDigitsBracketsAndPlus(number)) {
                 throw new RuntimeException("phone: " + number + " has invalid format!");
             }
             if (!hasLengthMoreThan(text, SMS_TEXT_MESSAGE_MIN_LENGTH)) {
                 throw new RuntimeException("message: " + text + " is too short!");
+            }
+            if (!numberIsFromCIS(number)) {
+                throw new RuntimeException("phone: " + number + " is not from CIS country!");
             }
             this.number = number;
             this.text = text;
