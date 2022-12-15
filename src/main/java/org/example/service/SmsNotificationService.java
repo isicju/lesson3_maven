@@ -10,8 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
 
-import static org.example.StringValidationUtils.hasLengthMoreThan;
-import static org.example.StringValidationUtils.hasOnlyDigits;
+import static org.example.StringValidationUtils.*;
 
 public class SmsNotificationService implements NotificationService{
     private final static String SMS_URL_PROVIDER = "https://gate.smsaero.ru/v2/sms/send";
@@ -55,12 +54,19 @@ public class SmsNotificationService implements NotificationService{
         String sign = "SMS Aero";
 
         public SmsBody(String number, String text) {
-            if (!hasOnlyDigits(number)) {
-                throw new RuntimeException("phone: " + number + " has invalid format!");
+
+            if (!isValidPhone(number)) {
+                if (!isValidPhoneRegion(number)) {
+                    throw new RuntimeException("Phone is not from cis region");
+                } else {
+                    throw new RuntimeException("phone: " + number + " has invalid format!");
+                }
             }
+
             if (!hasLengthMoreThan(text, SMS_TEXT_MESSAGE_MIN_LENGTH)) {
                 throw new RuntimeException("message: " + text + " is too short!");
             }
+
             this.number = number;
             this.text = text;
         }
