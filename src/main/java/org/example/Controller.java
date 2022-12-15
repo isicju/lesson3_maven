@@ -21,8 +21,8 @@ public class Controller {
 
         NotificationService smsService = new SmsNotificationService(name, password);
 
-        lookup.put(DELIVERY_CHANNEL.SMS, emailService);
-        lookup.put(DELIVERY_CHANNEL.EMAIL, smsService);
+        lookup.put(DELIVERY_CHANNEL.EMAIL, emailService);
+        lookup.put(DELIVERY_CHANNEL.SMS, smsService);
     }
 
 //    public void sendMessage(DELIVERY_CHANNEL deliveryChannel, String recipient, String content) {

@@ -1,6 +1,8 @@
 package org.example.service;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.google.gson.Gson;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -23,11 +25,15 @@ public class SmsNotificationService implements NotificationService{
     }
 
     @Override
-    public void sendMessage(String phone, String text) {
+    public void sendMessage(String phone, String text) throws JsonProcessingException {
         SmsBody body = new SmsBody(phone, text);
 
-        Gson gson = new Gson();
-        String validJson = gson.toJson(body);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String validJson = objectMapper.writeValueAsString(body);
+
+
+        //Gson gson = new Gson();
+        //String validJson = gson.toJson(body);
 
         HttpEntity<String> request = new HttpEntity<>(validJson, securityHeaders);
         restTemplate.postForObject(SMS_URL_PROVIDER, request, String.class);
