@@ -1,29 +1,30 @@
-package org.example;
+package org.example.utils;
 
+import org.example.DefaultTest;
 import org.junit.jupiter.api.Test;
 
-import static org.example.StringValidationUtils.hasOnlyDigitsBracketsAndPlus;
-import static org.example.StringValidationUtils.recipientHasGmail;
+import static org.example.utils.StringValidationUtils.hasOnlyDigitsBracketsAndPlus;
+import static org.example.utils.StringValidationUtils.recipientHasGmail;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class HomeWork4Tests extends DefaultTest {
+public class StringValidationUtilsTest extends DefaultTest {
 
     @Test
     public void testNumberWithBracketsAndPlus(){
         System.out.println(" test testNumberWithBracketsAndPlus is running! ");
         String[] positiveTestFields = new String[] {
-                "89999999999",   //без скобок и без плюса
-                "+79999999999",  //с плюсом
-                "8(999)9999999", //со скобками
-                "+7(999)9999999" //со скобками и с плюсом
+                "89999999999",   //no brackets && no pluses
+                "+79999999999",  //with plus
+                "8(999)9999999", //with 2 brackets
+                "+7(999)9999999" //with plus && 2 brackets
         };
         String[] negativeTestFields = new String[] {
-                "8(9999999999",   //с одной открывающейся скобкой
-                "8999)9999999",   //с одной закрывающейся скобкой
-                "8(999)999)9999", //с тремя скобками и более
-                "++++++++++++++", //только плюсы
-                "()()()()(()()(", //только скобки
-                ""                //пустое поле
+                "8(9999999999",   //one opening bracket
+                "8999)9999999",   //one closing bracket
+                "8(999)999)9999", //3+ brackets
+                "++++++++++++++", //only pluses
+                "()()()()(()()(", //only brackets
+                ""                //empty field
         };
         for (String positiveTestField : positiveTestFields)
             assertTrue(hasOnlyDigitsBracketsAndPlus(positiveTestField));

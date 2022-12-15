@@ -1,6 +1,6 @@
 package org.example.model;
 
-import static org.example.StringValidationUtils.*;
+import static org.example.utils.StringValidationUtils.*;
 
 public class EmailMessage {
     private final String email;

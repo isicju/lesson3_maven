@@ -1,7 +1,6 @@
 package org.example.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-import static org.example.StringValidationUtils.*;
+import static org.example.utils.StringValidationUtils.*;
 
 public class SmsNotificationService implements NotificationService {
     private final static String SMS_URL_PROVIDER = "https://gate.smsaero.ru/v2/sms/send";
