@@ -7,9 +7,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import static org.example.StringValidationUtils.hasLengthMoreThan;
-import static org.example.StringValidationUtils.hasOnlyDigits;
+import static org.example.StringValidationUtils.*;
 
 public class SmsNotificationService implements NotificationService{
     private final static String SMS_URL_PROVIDER = "https://gate.smsaero.ru/v2/sms/send";
@@ -42,13 +43,30 @@ public class SmsNotificationService implements NotificationService{
             set("Content-Type", "application/json");
         }};
     }
-
-    static class SmsBody {
+//(\+\d{7,1}( )?)?((\(\d{3}\))|\d{3})[- .]?\d{2}[- .]?\d{2}
+    //^\+?[0-9\-\s]*$
+   // ^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$
+    //^(\+7|8|99.|37.)[\s(]*\d{3}[)\s]*\d{3}[\s-]?\d{2}[\s-]?\d{2}$
+    public static class SmsBody {
         String number;
         String text;
         String sign = "SMS Aero";
+        private static final Pattern VALID_NUMBER =
+                Pattern.compile(
+                        "^(\\+7|8|99.|37.)[0-9\\-\\s]*$", Pattern.CASE_INSENSITIVE);
+
+        public static boolean isValidNumber(String number) {
+            Matcher matcher = VALID_NUMBER.matcher(number);
+            return matcher.find();
+        }
 
         public SmsBody(String number, String text) {
+            if(!isValidNumber(number)) {
+                throw new RuntimeException("phone: " + number + " has invalid format!");
+            }
+            if (!validMobileNumber(number)) {
+                throw new RuntimeException("phone: " + number + " has invalid format!");
+            }
             if (!hasOnlyDigits(number)) {
                 throw new RuntimeException("phone: " + number + " has invalid format!");
             }
@@ -60,4 +78,9 @@ public class SmsNotificationService implements NotificationService{
         }
     }
 
+    public static void main(String[] args) {
+        System.out.println("");
+    }
+
 }
+

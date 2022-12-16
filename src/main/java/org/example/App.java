@@ -1,11 +1,28 @@
 package org.example;
 
 
+import java.util.Arrays;
+
 public class App {
 
     public static void main(String[] args) {
         System.out.println("works");
+        bubbleSort(new int[]{3, 5, 4});
 
+    }
+
+    public static int[] bubbleSort(int[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = 0; j < array.length - i - 1; j++) {
+                if (array[j + 1] < array[j]) {
+                    int temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                }
+            }
+        }
+        System.out.println(Arrays.toString(array));
+        return array;
     }
 
     // myChars.length -> N
@@ -36,5 +53,7 @@ public class App {
     public String helloWorld() {
         return "hello world";
     }
+
+
 
 }
