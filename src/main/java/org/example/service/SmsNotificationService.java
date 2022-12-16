@@ -2,16 +2,16 @@ package org.example.service;
 
 import com.google.gson.Gson;
 import org.apache.commons.codec.binary.Base64;
+import org.example.StringValidationUtils;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
 
-import static org.example.StringValidationUtils.hasLengthMoreThan;
-import static org.example.StringValidationUtils.hasOnlyDigits;
+import static org.example.StringValidationUtils.*;
 
-public class SmsNotificationService implements NotificationService{
+public class SmsNotificationService implements NotificationService {
     private final static String SMS_URL_PROVIDER = "https://gate.smsaero.ru/v2/sms/send";
     private final static int SMS_TEXT_MESSAGE_MIN_LENGTH = 3;
 
@@ -49,7 +49,7 @@ public class SmsNotificationService implements NotificationService{
         String sign = "SMS Aero";
 
         public SmsBody(String number, String text) {
-            if (!hasOnlyDigits(number)) {
+            if (!validSNGNumber(number)) {
                 throw new RuntimeException("phone: " + number + " has invalid format!");
             }
             if (!hasLengthMoreThan(text, SMS_TEXT_MESSAGE_MIN_LENGTH)) {
@@ -57,7 +57,10 @@ public class SmsNotificationService implements NotificationService{
             }
             this.number = number;
             this.text = text;
+
+
+            // Homework_4 Part 2
+            // Меняем условие проверки " if (!validSNGNumber(number)) " на " if (!validNumberPlus(number)) "
         }
     }
-
 }

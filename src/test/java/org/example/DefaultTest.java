@@ -19,6 +19,7 @@ public class DefaultTest {
         String invertedString = app.inverseString(inputString);
         assertThat(invertedString, equalTo("olleh"));
     }
+
 /*
     @Test
     public void checkHasSumPositive() {
@@ -34,4 +35,13 @@ public class DefaultTest {
         Assertions.assertEquals(App.NO_MATCHES, negativeMatch);
     }*/
 
+
+    //  // Homework 4 Test BubbleSort
+    @Test
+    public void BubbleSort() {
+        App app = new App();
+        int[] array = {9, 8, 7, 6, 5, 4, 3, 2, 1};
+        int[] sortedArray = App.BubbleSort(array);
+        assertThat(sortedArray, equalTo(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9}));
+    }
 }

@@ -5,9 +5,12 @@ import com.mailjet.client.MailjetClient;
 import com.mailjet.client.MailjetRequest;
 import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.resource.Emailv31;
+import org.example.StringValidationUtils;
 import org.example.model.EmailMessage;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import static org.example.StringValidationUtils.*;
 
 public class EmailNotificationService implements NotificationService {
 
@@ -42,17 +45,21 @@ public class EmailNotificationService implements NotificationService {
 
     @Override
     public void sendMessage(String recipient, String content) {
-        EmailMessage emailMessage = new EmailMessage(recipient, content);
-        JSONObject jsonMail = buildJsonMailContent(emailMessage);
-        JSONArray mails = buildManyJsonMails(jsonMail);
+        if (validSendMessage(recipient)) {
+            EmailMessage emailMessage = new EmailMessage(recipient, content);
+            JSONObject jsonMail = buildJsonMailContent(emailMessage);
+            JSONArray mails = buildManyJsonMails(jsonMail);
 
-        MailjetRequest request = new MailjetRequest(Emailv31.resource)
-                .property(Emailv31.MESSAGES, mails);
-        try {
-            client.post(request);
-        } catch (MailjetException e) {
-            throw new RuntimeException(e);
+            MailjetRequest request = new MailjetRequest(Emailv31.resource)
+                    .property(Emailv31.MESSAGES, mails);
+            try {
+                client.post(request);
+            } catch (MailjetException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            throw new RuntimeException("You can only send by mail: .gmail\n" +
+                    "And your mail:" + recipient + " does not match .gmail");
         }
     }
-
 }
