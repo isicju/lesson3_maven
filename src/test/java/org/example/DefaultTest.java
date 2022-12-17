@@ -1,24 +1,22 @@
 package org.example;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DefaultTest {
 
 
-    @Test
-    public void inverseString() {
-        App app = new App();
-        String inputString = "hello";
-        String invertedString = app.inverseString(inputString);
-        assertThat(invertedString, equalTo("olleh"));
-    }
+//    @Test
+//    public void inverseString() {
+//        App app = new App();
+//        String inputString = "hello";
+//        String invertedString = app.inverseString(inputString);
+//        assertThat(invertedString, equalTo("olleh"));
+//    }
 /*
     @Test
     public void checkHasSumPositive() {

@@ -55,7 +55,17 @@
             <artifactId>gson</artifactId>
             <version>2.10</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/guru.nidi/graphviz-java -->
+        <dependency>
+            <groupId>guru.nidi</groupId>
+            <artifactId>graphviz-java</artifactId>
+            <version>0.18.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.atp-fivt</groupId>
+            <artifactId>ljv</artifactId>
+            <version>1.04</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

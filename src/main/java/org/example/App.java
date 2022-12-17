@@ -3,24 +3,16 @@ package org.example;
 
 public class App {
 
-    public static void main(String[] args) {
-        System.out.println("works");
-
-    }
-
     // myChars.length -> N
     public String inverseString(String myChars) {
         byte[] myCharsByteArray = myChars.getBytes(); // N
         byte[] invertedByteArray = new byte[myCharsByteArray.length]; // C -> N
-
-
         for (int i = 0; i < myCharsByteArray.length; i++) {
             invertedByteArray[myCharsByteArray.length - i - 1] = myCharsByteArray[i]; // 10
         }
 
         return new String(invertedByteArray);
     }
-
 
     public boolean hasSum(int[] input, int sum) {
         for (int i = 0; i < input.length; i++) {
