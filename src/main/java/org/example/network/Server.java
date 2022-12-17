@@ -24,6 +24,13 @@ public class Server {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
             String receivedMessage = in.readLine();
+            StringBuilder stringBuilder = new StringBuilder();
+            while (receivedMessage != null && !receivedMessage.isEmpty()){
+                receivedMessage = in.readLine();
+                stringBuilder.append(receivedMessage);
+            }
+            System.out.println(stringBuilder);
+
 
             if ("hello server".equals(receivedMessage)) {
                 System.out.println("server received hello server word!");
