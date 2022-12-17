@@ -31,18 +31,36 @@ public class Server {
             }
             System.out.println(stringBuilder);
 
+//            if ("hello server".equals(receivedMessage)) {
+//                System.out.println("server received hello server word!");
+//            } else if ("exit".equals(receivedMessage)) {
+//                System.out.println("received message from client to shutdown..");
+//                out.println("server will be shutdown");
+//                close();
+//                break;
+//            } else {
+//                System.out.println("server received not hello server word!");
+//                out.println("unrecognised greeting");
+//            }
 
-            if ("hello server".equals(receivedMessage)) {
-                System.out.println("server received hello server word!");
-            } else if ("exit".equals(receivedMessage)) {
-                System.out.println("received message from client to shutdown..");
-                out.println("server will be shutdown");
-                close();
-                break;
-            } else {
-                System.out.println("server received not hello server word!");
-                out.println("unrecognised greeting");
-            }
+            out.println("HTTP/1.1 200 OK\n" +
+                    "Server: nginx\n" +
+                    "Date: Fri, 02 Oct 2015 11:54:02 GMT\n" +
+                    "Connection: close\n" +
+                    "Vary: Accept-Encoding\n" +
+                    "P3P: CP=\"Tumblr's privacy policy is available here:\n" +
+                    "\thttps://www.tumblr.com/policy/en/privacy\"\n" +
+                    "<!DOCTYPE html>\n" +
+                    "<html>\n" +
+                    "<body>\n" +
+                    "\n" +
+                    "<h1>My First Heading</h1>\n" +
+                    "<p>My first paragraph.</p>\n" +
+                    "<iframe width=\"420\" height=\"315\"\n" +
+                            "src=\"https://www.youtube.com/embed/jifUJrYPZQQ\">\n" +
+                            "</iframe>" +
+                    "</body>\n" +
+                    "</html>");
             close();
         }
     }
