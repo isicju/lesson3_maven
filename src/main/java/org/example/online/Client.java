@@ -34,8 +34,8 @@ public class Client {
         org.example.network.Client client = new org.example.network.Client();
         client.startConnection("127.0.0.1", 70);
         System.out.println("sending hello server");
-//        String response = client.sendMessage("some another message!");
-        String response = client.sendMessage("exit");
+        String response = client.sendMessage("hello server");
+//        String response = client.sendMessage("exit");
         System.out.println("client received from server: " + response);
     }
 
