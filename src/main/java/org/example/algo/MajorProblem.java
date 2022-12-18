@@ -1,13 +1,14 @@
 package org.example.algo;
 
 public class MajorProblem {
-//Given an integer array of size `n`, return the element
-// which appears more than `n/2` times.
-// Assume that the input always contain the majority element.
+// Для заданного массива вернуть число которое встречается чаще всех остальных
+//Input : [2, 8, 7, 2, 2, 5, 2, 3, 1, 2, 2]
+//Output: 2
+//
+//Input : [1, 3, 1, 1]
+//Output: 1
 
-// if target elemnt is not present - throw an exception (cover that case in tests)
-
-    private int findMajor(int[] input, int target){
+    private int findMajorityElement(int[] input){
         return 0;
     }
 
