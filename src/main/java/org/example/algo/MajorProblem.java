@@ -7,7 +7,7 @@ public class MajorProblem {
 
 // if target elemnt is not present - throw an exception (cover that case in tests)
 
-    private int findMajor(String[] input, int target){
+    private int findMajor(int[] input, int target){
         return 0;
     }
 
