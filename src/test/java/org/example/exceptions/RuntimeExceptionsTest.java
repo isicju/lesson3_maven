@@ -1,24 +1,18 @@
 package org.example.exceptions;
 
+import org.example.DefaultTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class RuntimeExceptionsTest {
-
+public class RuntimeExceptionsTest extends DefaultTest {
     @Test
     void exceptionTesting() {
         RuntimeExceptions runtimeExceptions = new RuntimeExceptions();
-
-        RuntimeException thrown = assertThrows(
+        assertThrows(
                 NullPointerException.class,
                 () -> runtimeExceptions.throwsNullPointerException(),
-                "Expected doThing() to throw, but it didn't"
+                "Had to trown an exception but it didn't"
         );
-
-//        assertTrue(thrown.getMessage().contentEquals("Runtime"));
     }
-
-
 }

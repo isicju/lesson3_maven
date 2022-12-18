@@ -1,4 +1,9 @@
 package org.example.exceptions;
 
-public class ErrorsTest {
+import org.example.DefaultTest;
+
+public class ErrorsTest extends DefaultTest {
+
+
+
 }

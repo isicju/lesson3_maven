@@ -3,8 +3,8 @@ package org.example.exceptions;
 public class RuntimeExceptions {
 
     public void throwsNullPointerException(){
-//        String myString = null;
-//        myString.length();
+        String myString = null;
+        myString.length();
     }
 
     public void throwsArrayIndexOutOfBoundsException(){
@@ -22,4 +22,5 @@ public class RuntimeExceptions {
     public static void throwsClassCastException(){
 
     }
+
 }
