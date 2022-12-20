@@ -33,18 +33,20 @@ public class MajorProblemTest extends DefaultTest {
     @Test
     void exceptionalCasesTest() {
         int[] testArray5 = null; // на входе null
-        assertThrows(
+        IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> majorProblem.findMajorityElement(testArray5),
                 "Expected findMajorityElement(int[] input) to throw an exception, but it didn't"
         );
+        assertThat("Массив должен содержать целые числа", equalTo(exception.getMessage()));
 
         int[] testArray6 = {}; // на входе пустой массив
-        assertThrows(
+        exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> majorProblem.findMajorityElement(testArray6),
                 "Expected findMajorityElement(int[] input) to throw an exception, but it didn't"
         );
+        assertThat("Массив должен содержать целые числа", equalTo(exception.getMessage()));
     }
 
 }

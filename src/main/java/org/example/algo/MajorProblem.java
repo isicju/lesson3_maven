@@ -14,7 +14,7 @@ public class MajorProblem {
 
     public int findMajorityElement(int[] input) {
         if (input == null || input.length == 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Массив должен содержать целые числа");
         }
         int target = 0;
         Arrays.sort(input);
