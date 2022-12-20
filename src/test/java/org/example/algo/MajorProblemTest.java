@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MajorProblemTest extends DefaultTest {
 
@@ -31,11 +32,19 @@ public class MajorProblemTest extends DefaultTest {
 
     @Test
     void exceptionalCasesTest() {
-        int[] testArray5 = null; // выбрасывается NullPointerException с сообщением в консоль
-        majorProblem.findMajorityElement(testArray5);
+        int[] testArray5 = null; // на входе null
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> majorProblem.findMajorityElement(testArray5),
+                "Expected findMajorityElement(int[] input) to throw an exception, but it didn't"
+        );
 
-        int[] testArray6 = {}; // выбрасывается IndexOutOfBoundsException с сообщением в консоль
-        majorProblem.findMajorityElement(testArray6);
+        int[] testArray6 = {}; // на входе пустой массив
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> majorProblem.findMajorityElement(testArray6),
+                "Expected findMajorityElement(int[] input) to throw an exception, but it didn't"
+        );
     }
 
 }
