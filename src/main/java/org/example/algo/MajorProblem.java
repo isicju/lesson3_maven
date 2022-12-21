@@ -8,8 +8,22 @@ public class MajorProblem {
 //Input : [1, 3, 1, 1]
 //Output: 1
 
-    private int findMajorityElement(int[] input){
-        return 0;
+    private static int findMajorityElement(int[] input) throws IllegalArgumentException {
+        int number = 0;
+            for (int i = 0; i < input.length; i++) {
+                for (int j = 0; j < input.length; j++) {
+                    if (input[i] < 0) {
+                        throw new IllegalArgumentException();
+                    }
+                    if (input[i] == input[j]) {
+                        number = input[j];
+                    }
+                }
+            }
+        return number;
     }
 
+    public static void main(String[] args) {
+            System.out.println(findMajorityElement(new int[]{2, 8, 7, 2, 2, 5, 2, 3, 1, 2, 2}));
+    }
 }

@@ -13,6 +13,7 @@ public class MainTest extends DefaultTest{
 
     @BeforeAll
     public void init(){
+
         app = new App();
     }
 

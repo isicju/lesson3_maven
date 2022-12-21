@@ -1,10 +1,21 @@
 package org.example.exceptions;
 
-public class Errors {
+import java.util.ArrayList;
 
-    public void throwsOOOException(){
+public class Errors {
+    public static void main(String[] args) {
+        throwsStackOverFlowError();
+        throwsOOOException();
     }
 
-    public void throwsStackOverFlowError(){
+    public static void throwsOOOException(){
+        ArrayList<Integer> array = new ArrayList<>();
+        while(true) {
+            array.add(10);
+        }
+    }
+
+    public static void throwsStackOverFlowError(){
+        throwsStackOverFlowError();
     }
 }
