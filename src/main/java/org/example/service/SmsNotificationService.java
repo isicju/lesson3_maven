@@ -2,7 +2,6 @@ package org.example.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -12,7 +11,7 @@ import java.nio.charset.Charset;
 
 import static org.example.StringValidationUtils.hasLengthMoreThan;
 import static org.example.StringValidationUtils.hasOnlyDigits;
-import static org.example.StringValidationUtils.hasCisCode;
+import static org.example.StringValidationUtils.isValidNumber;
 
 public class SmsNotificationService implements NotificationService{
     private final static String SMS_URL_PROVIDER = "https://gate.smsaero.ru/v2/sms/send";
@@ -60,21 +59,23 @@ public class SmsNotificationService implements NotificationService{
         String sign = "SMS Aero";
 
         public SmsBody(String number, String text) {
+//            if (!hasOnlyDigits(number)) {
+//                throw new RuntimeException("phone: " + number + " has invalid format!");
+//            }
+            if (!isValidNumber(number)) {
+                throw new RuntimeException("phone: " + number + " has invalid format!");
+            }
+            if (!hasLengthMoreThan(text, SMS_TEXT_MESSAGE_MIN_LENGTH)) {
+                throw new RuntimeException("message: " + text + " is too short!");
+            }
+
             String[] formattedNumber = number.split("[+()\\-]");
             StringBuilder sb = new StringBuilder();
             for (String s : formattedNumber) {
                 sb.append(s);
             }
             number = sb.toString();
-            if (!hasOnlyDigits(number)) {
-                throw new RuntimeException("phone: " + number + " has invalid format!");
-            }
-            if (!hasCisCode(number)) {
-                throw new RuntimeException("phone: " + number + " has invalid code!");
-            }
-            if (!hasLengthMoreThan(text, SMS_TEXT_MESSAGE_MIN_LENGTH)) {
-                throw new RuntimeException("message: " + text + " is too short!");
-            }
+
             this.number = number;
             this.text = text;
         }

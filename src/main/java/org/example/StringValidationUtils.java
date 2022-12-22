@@ -10,10 +10,10 @@ public class StringValidationUtils {
             Pattern.compile("^[0-9]*$", Pattern.CASE_INSENSITIVE);
     private static final Pattern VALID_A_Z =
             Pattern.compile("^[a-zA-Z]*$", Pattern.CASE_INSENSITIVE);
-    private static final Pattern VALID_CIS_CODE =
-            Pattern.compile("^(994|374|375|7|996|373|992|993|998|380)[0-9]*$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern VALID_CIS_NUMBER =
+            Pattern.compile("^\\+?(994|374|375|7|996|373|992|993|998|380)\\(?[0-9]{2,4}\\)?[0-9]{3}-?[0-9]{2}-?[0-9]{2}$", Pattern.CASE_INSENSITIVE);
     private static final Pattern VALID_GMAIL_ADDRESS_REGEX =
-            Pattern.compile("^[A-Z0-9._%+-]+(@gmail\\.com)$", Pattern.CASE_INSENSITIVE);
+            Pattern.compile("^[a-z0-9]+(?!.*(?:\\+{2,}|-{2,}|\\.{2,}))(?:[.+\\-]?[a-z0-9])*@gmail\\.com$", Pattern.CASE_INSENSITIVE);
 
     public static boolean isValidEmail(String email) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
@@ -34,8 +34,8 @@ public class StringValidationUtils {
         return matcher.find();
     }
 
-    public static boolean hasCisCode(String digit) {
-        Matcher matcher = VALID_CIS_CODE.matcher(digit);
+    public static boolean isValidNumber(String number) {
+        Matcher matcher = VALID_CIS_NUMBER.matcher(number);
         return matcher.find();
     }
 
