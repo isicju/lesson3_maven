@@ -6,20 +6,14 @@ import java.io.IOException;
 
 public class CheckedExceptions {
 
-    public static void throwsFileNotFoundException() {
-        String file = "file.txt";
-        try {
+    public void throwsFileNotFoundException() throws IOException{ //файл не найден
+        String file = "C:/server1.txt";
             try (FileReader input = new FileReader(file);
                  BufferedReader reader = new BufferedReader(input)) {
                 while (reader.ready()) {
-                    System.out.println(reader.read());
+                    reader.read();
                 }
-
             }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            System.out.println(e.getClass());
-        }
     }
 
 }

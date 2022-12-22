@@ -8,7 +8,7 @@ public class MajorProblem {
 //Input : [1, 3, 1, 1]
 //Output: 1
 
-    private static int findMajorityElement(int[] input) throws IllegalArgumentException {
+    public static int findMajorityElement(int[] input) throws IllegalArgumentException {
         int number = 0;
             for (int i = 0; i < input.length; i++) {
                 for (int j = 0; j < input.length; j++) {

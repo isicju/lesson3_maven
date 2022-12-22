@@ -11,7 +11,7 @@ public class PathFinderTest extends DefaultTest {
     @Test
     public void ok() {
         PathFinder pathFinder = new PathFinder();
-        boolean hasConnection = pathFinder.hasConnection("cat", "zoz", new String[]{"cot", "zot"});
+        boolean hasConnection = pathFinder.hasConnection("cat", "dog", new String[]{"dod", "cot", "dod", "fog", "cog", "log"});
         Assertions.assertTrue(hasConnection);
     }
 

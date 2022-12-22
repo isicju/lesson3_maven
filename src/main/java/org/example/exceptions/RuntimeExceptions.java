@@ -1,39 +1,38 @@
 package org.example.exceptions;
 
-import java.util.Scanner;
+import com.mailjet.client.resource.User;
 
-import static java.lang.System.in;
+import java.util.ArrayList;
+
 
 public class RuntimeExceptions {
-    public static void main(String[] args) {
-        throwsIllegalArgumentException();
-    }
 
-    public void throwsNullPointerException(){
+    public void throwsNullPointerException(){ //неверное использование пустой ссылки
         String myString = null;
         myString.length();
     }
 
-    public void throwsArrayIndexOutOfBoundsException(){
+    public void throwsArrayIndexOutOfBoundsException(){ //выход индекса за границу массива
         int [] array = new int[5];
         for (int i = 0; i < array.length; i++) {
             array[6] = 5;
         }
     }
 
-    public void throwsNumberFormatException(){
+    public void throwsNumberFormatException(){ //неверное преобразование строки в числовой формат
         int number = 234;
         String str = "run";
         number = Integer.parseInt(str);
     }
 
-    public static void throwsIllegalArgumentException(){
-        Scanner scanner = new Scanner(System.in);
-        int value = scanner.nextInt();
-        System.out.println(value);
+    public void throwsIllegalArgumentException(){ //неверный аргумент при вызове метода
+        ArrayList<String> list = new ArrayList<>(-10);
+        list.add("a");
+        list.add("b");
+        list.add("c");
     }
 
-    public void throwsClassCastException() {
+    public void throwsClassCastException() { //неверное приведение
         Object value = Integer.valueOf(5);
         String str = (String) value;
     }

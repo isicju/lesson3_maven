@@ -3,19 +3,16 @@ package org.example.exceptions;
 import java.util.ArrayList;
 
 public class Errors {
-    public static void main(String[] args) {
-        throwsStackOverFlowError();
-        throwsOOOException();
-    }
 
-    public static void throwsOOOException(){
+    public void throwsOOOException(){ //нехватка памяти
         ArrayList<Integer> array = new ArrayList<>();
         while(true) {
             array.add(10);
         }
     }
 
-    public static void throwsStackOverFlowError(){
+    public void throwsStackOverFlowError(){ //переполнение стека
+
         throwsStackOverFlowError();
     }
 }

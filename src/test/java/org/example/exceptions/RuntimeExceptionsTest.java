@@ -40,7 +40,7 @@ public class RuntimeExceptionsTest extends DefaultTest {
     }
 
     @Test
-    void IllegalArgumentTesting() {  //НЕ РАБОТАЕТ С КОНСОЛЬЮ
+    void IllegalArgumentTesting() {
         assertThrows(IllegalArgumentException.class,
                 () -> runtimeExceptions.throwsIllegalArgumentException(),
                 "Had to trown an exception but it didn't"
