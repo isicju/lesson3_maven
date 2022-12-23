@@ -8,8 +8,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
 
-import static org.example.StringValidationUtils.hasLengthMoreThan;
-import static org.example.StringValidationUtils.hasOnlyDigits;
+import static org.example.validators.StringValidationUtils.hasLengthMoreThan;
+import static org.example.validators.StringValidationUtils.hasOnlyDigits;
 
 public class SmsNotificationService implements NotificationService{
     private final static String SMS_URL_PROVIDER = "https://gate.smsaero.ru/v2/sms/send";
