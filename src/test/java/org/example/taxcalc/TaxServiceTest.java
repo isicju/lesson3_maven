@@ -11,14 +11,14 @@ public class TaxServiceTest extends DefaultTest {
     TaxService taxService;
 
     @BeforeEach
-    public void init(){
+    public void init() {
         taxService = new TaxService();
     }
 
     @DisplayName("Verifying net salary for US citizen with 12 month of work")
     @Test
-    public void simpleTest(){
-        User validUserFromUS = new User(Region.US, "John Smith",  123000, 12);
+    public void simpleTest() {
+        User validUserFromUS = new User(Region.US, "John Smith", 123000, 12);
         float valueAfterTax = taxService.calculateYearIncome(validUserFromUS);
         Assertions.assertEquals(valueAfterTax, 100860.0f);
     }

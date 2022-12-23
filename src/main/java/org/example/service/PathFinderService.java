@@ -7,20 +7,21 @@ public class PathFinderService {
         if (!isValidPathWordInputs(begging, ending, elements)) return false;
 
 
-        String[] fullSequence = new String[elements.length + 2];
-        System.arraycopy(elements, 0, fullSequence, 1, elements.length);
-        fullSequence[0] = begging;
-        fullSequence[elements.length + 1] = ending;
-
-
-        String previous = null;
-        for (String current : fullSequence) {
-            if (previous != null && !hasOneCharDifference(previous, current)) {
-                return false;
+        String currentElement = begging;
+        StringBuilder chain = new StringBuilder(" -> ");
+        for (int i = 0; i < elements.length; i++) {
+            if (elements[i].equals("***")) continue;
+            for (int j = 0; j < elements.length; j++) {
+                if (hasOneCharDifference(currentElement, elements[j])) {
+                    currentElement = elements[j];
+                    elements[j] = "***";
+                    break;
+                }
             }
-            previous = current;
+            chain.append(currentElement).append(" -> ");
         }
-        return true;
+        System.out.println(begging + chain + ending);
+        return hasOneCharDifference(currentElement, ending);
     }
 
     private static boolean isValidPathWordInputs(String begging, String ending, String[] elements) {
@@ -47,6 +48,4 @@ public class PathFinderService {
         }
         return true;
     }
-
-
 }
