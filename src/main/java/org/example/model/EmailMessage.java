@@ -1,7 +1,7 @@
 package org.example.model;
 
-import static org.example.StringValidationUtils.hasLengthMoreThan;
-import static org.example.StringValidationUtils.isValidEmail;
+import static org.example.validators.StringValidationUtils.hasLengthMoreThan;
+import static org.example.validators.StringValidationUtils.isValidEmail;
 
 public class EmailMessage {
     private final String email;

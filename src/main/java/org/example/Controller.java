@@ -11,24 +11,23 @@ public class Controller {
 
    static Map<DELIVERY_CHANNEL, NotificationService> lookup = new HashMap<>();
 
-    public static void init(String[] args) {
-        String emailName = ""; //check  in group
-        String emailPassword = ""; //check  in group
+    public static void init() {
+
+        // authentication info
+
+
         NotificationService emailService =  new EmailNotificationService(emailName, emailPassword);
+        lookup.put(DELIVERY_CHANNEL.EMAIL, emailService);
 
-        String name = ""; //check  in group
-        String password = ""; //check in group
+        NotificationService smsService = new SmsNotificationService(smsLogin, smsPassword);
+        lookup.put(DELIVERY_CHANNEL.SMS, smsService);
 
-        NotificationService smsService = new SmsNotificationService(name, password);
-
-        lookup.put(DELIVERY_CHANNEL.SMS, emailService);
-        lookup.put(DELIVERY_CHANNEL.EMAIL, smsService);
     }
 
 
-//    public void sendMessage(DELIVERY_CHANNEL deliveryChannel, String recipient, String content) {
-//        lookup.get(DELIVERY_CHANNEL.SMS).sendMessage(recipient, content);
-//    }
+    public void sendMessage(DELIVERY_CHANNEL deliveryChannel, String recipient, String content) {
+        lookup.get(deliveryChannel).sendMessage(recipient, content);
+    }
 
     enum DELIVERY_CHANNEL {
         SMS, EMAIL, TELEGRAM

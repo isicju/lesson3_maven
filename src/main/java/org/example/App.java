@@ -4,11 +4,19 @@ package org.example;
 public class App {
 
     public static void main(String[] args) {
-        System.out.println("works");
+        final String MyMessage = "Here is my complex info: /%@1";
+        final String myPhone = "89817862371";
+
+        Controller controller = new Controller();
+        Controller.init();
+
+        controller.sendMessage(Controller.DELIVERY_CHANNEL.EMAIL,"ramrush.r@gmail.com", MyMessage);
+        System.out.println("send");
 
     }
 
-    // myChars.length -> N
+
+    // Here is some excess code. Looking forward to delete it
     public String inverseString(String myChars) {
         byte[] myCharsByteArray = myChars.getBytes(); // N
         byte[] invertedByteArray = new byte[myCharsByteArray.length]; // C -> N
@@ -20,7 +28,6 @@ public class App {
 
         return new String(invertedByteArray);
     }
-
 
     public boolean hasSum(int[] input, int sum) {
         for (int i = 0; i < input.length; i++) {
