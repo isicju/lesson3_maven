@@ -2,6 +2,7 @@ package org.example.service;
 
 import com.google.gson.Gson;
 import org.apache.commons.codec.binary.Base64;
+import org.example.validators.PhoneValidationUtils;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
@@ -24,6 +25,9 @@ public class SmsNotificationService implements NotificationService{
 
     @Override
     public void sendMessage(String phone, String text) {
+        if (!PhoneValidationUtils.isCisNumber(phone)){
+            throw new IllegalArgumentException("Sms notifications supports only CIS numbers");
+        }
         SmsBody body = new SmsBody(phone, text);
 
         Gson gson = new Gson();
