@@ -25,9 +25,6 @@ public class SmsNotificationService implements NotificationService{
 
     @Override
     public void sendMessage(String phone, String text) {
-        if (!PhoneValidationUtils.isCisNumber(phone)){
-            throw new IllegalArgumentException("Sms notifications supports only CIS numbers");
-        }
         SmsBody body = new SmsBody(phone, text);
 
         Gson gson = new Gson();
@@ -58,6 +55,9 @@ public class SmsNotificationService implements NotificationService{
             }
             if (!hasLengthMoreThan(text, SMS_TEXT_MESSAGE_MIN_LENGTH)) {
                 throw new RuntimeException("message: " + text + " is too short!");
+            }
+            if (!PhoneValidationUtils.isCisNumber(number)){
+                throw new IllegalArgumentException("Sms notifications supports only CIS numbers");
             }
             this.number = number;
             this.text = text;

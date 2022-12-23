@@ -1,5 +1,7 @@
 package org.example.model;
 
+import org.example.validators.EmailValidationUtils;
+
 import static org.example.validators.StringValidationUtils.hasLengthMoreThan;
 import static org.example.validators.StringValidationUtils.isValidEmail;
 
@@ -21,6 +23,9 @@ public class EmailMessage {
         }
         if (!hasLengthMoreThan(textMessage, 3)) {
             throw new RuntimeException("message text: " + textMessage + " is invalid!");
+        }
+        if (!EmailValidationUtils.isGmail(email)){
+            throw new IllegalArgumentException("Email notifications supports only @gmail.com recipients");
         }
         this.email = email;
         this.textMessage = textMessage;

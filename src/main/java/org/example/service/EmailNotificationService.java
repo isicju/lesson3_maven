@@ -43,9 +43,6 @@ public class EmailNotificationService implements NotificationService {
 
     @Override
     public void sendMessage(String recipient, String content) {
-        if (!EmailValidationUtils.isGmail(recipient)){
-            throw new IllegalArgumentException("Email notifications supports only @gmail.com recipients");
-        }
         EmailMessage emailMessage = new EmailMessage(recipient, content);
         JSONObject jsonMail = buildJsonMailContent(emailMessage);
         JSONArray mails = buildManyJsonMails(jsonMail);
