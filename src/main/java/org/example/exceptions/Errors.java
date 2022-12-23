@@ -3,7 +3,6 @@ package org.example.exceptions;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Errors {
 
     public void throwsOOOException() {

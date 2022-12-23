@@ -1,11 +1,9 @@
 package org.example.service;
 
-
 public class PathFinderService {
 
     public static boolean hasConnectionBetweenTwoWords(String begging, String ending, String[] elements) {
         if (!isValidPathWordInputs(begging, ending, elements)) return false;
-
 
         String currentElement = begging;
         StringBuilder chain = new StringBuilder(" -> ");
@@ -49,3 +47,5 @@ public class PathFinderService {
         return true;
     }
 }
+
+// Оценка сложности алгоритма: O(n^3)

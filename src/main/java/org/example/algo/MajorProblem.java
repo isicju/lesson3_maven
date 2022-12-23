@@ -1,8 +1,6 @@
 package org.example.algo;
 
-
 import java.util.*;
-
 
 public class MajorProblem {
 // Для заданного массива вернуть число которое встречается чаще всех остальных
@@ -36,6 +34,7 @@ public class MajorProblem {
 
         return result;
     }
-
 }
+
+// Оценка сложности алгоритма: O(n)
 
