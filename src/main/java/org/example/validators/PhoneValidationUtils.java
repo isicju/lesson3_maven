@@ -29,7 +29,6 @@ public class PhoneValidationUtils {
     }
 
     private static String parseNumber(String number){
-
-        return number;
+        return number.replaceAll("\\W", "");
     }
 }

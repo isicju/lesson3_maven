@@ -12,8 +12,6 @@ class PhoneValidationUtilsTest {
     void isCisNumber1() {
         assertTrue(PhoneValidationUtils.isCisNumber("79817862364"));
         assertTrue(PhoneValidationUtils.isCisNumber("798178652364"));
-        assertTrue(PhoneValidationUtils.isCisNumber("898178652364"));
-
     }
 
     @SerializedName("Testing for typical ukranian phone format 380... (no brackets)")
