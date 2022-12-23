@@ -6,6 +6,7 @@ import com.mailjet.client.MailjetRequest;
 import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.resource.Emailv31;
 import org.example.model.EmailMessage;
+import org.example.validators.EmailValidationUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -42,6 +43,9 @@ public class EmailNotificationService implements NotificationService {
 
     @Override
     public void sendMessage(String recipient, String content) {
+        if (!EmailValidationUtils.isGmail(recipient)){
+            throw new IllegalArgumentException("Email notifications supports only @gmail.com recipients");
+        }
         EmailMessage emailMessage = new EmailMessage(recipient, content);
         JSONObject jsonMail = buildJsonMailContent(emailMessage);
         JSONArray mails = buildManyJsonMails(jsonMail);
