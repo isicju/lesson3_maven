@@ -1,9 +1,27 @@
-<head>
-    <script src="myscripts.js"></script>
-</head>
 
+<!DOCTYPE html>
 <html>
-<h1>
-    Works!
-</h1>
+<head>
+    <script>
+        function getDataFromServerAndShow() {
+            const Http = new XMLHttpRequest();
+            const url = 'http://localhost:8080/users';
+            Http.open("GET", url);
+            Http.send();
+
+            Http.onreadystatechange = (e) => {
+                alert(Http.responseText)
+            }
+        }
+    </script>
+</head>
+<body>
+<h2>Click on button to see users</h2>
+
+<p id="demo">USER MAGIC BUTTON</p>
+<button type="button" onclick="getDataFromServerAndShow()">Try it</button>
+
+</body>
 </html>
+
+
