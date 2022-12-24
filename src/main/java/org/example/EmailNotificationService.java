@@ -20,44 +20,66 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class EmailNotificationService {
 
-    public static void main1(String[] args) {
-        String name = "53ffc361c9d9692e9060ef89c18f1c11";
-        String password = "47db15682b550bdf44e2609e94c0dd4a";
+    public static void main(String[] args) throws InterruptedException {
+        String name = "";
+        String password = "";
 
-        String recipient = "isicju@gmail.com";
-        String textMessage = "kekekek";
 
-        ClientOptions options = ClientOptions.builder()
-                .apiKey(name)
-                .apiSecretKey(password)
-                .build();
+        String recipient = "danilaevd7@gmail.com";
+        String textMessage = "{\n" +
+                "\n" +
+                "\"time\":\"2022-02-21 10:00\",\n" +
+                "\n" +
+                "\"label\":\"Office standup meeting\"\n" +
+                "\n" +
+                "}";
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String dateTimeInMessage = "2022-12-23 23:20";
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        LocalDateTime startTime = LocalDateTime.now();
+        while (!dateTimeInMessage.contains(currentDateTime.format(dateTimeFormatter))) {
+            Thread.sleep(3000);
+            System.out.println("wait send");
 
-        MailjetClient client = new MailjetClient(options);
-        MailjetRequest request = new MailjetRequest(Emailv31.resource)
-                .property(Emailv31.MESSAGES, new JSONArray()
-                        .put(new JSONObject()
-                                .put(Emailv31.Message.FROM, new JSONObject()
-                                        .put("Email", "isicju@gmail.com")
-                                        .put("Name", "Me"))
-                                .put(Emailv31.Message.TO, new JSONArray()
-                                        .put(new JSONObject()
-                                                .put("Email", recipient)
-                                                .put("Name", "Java course 2022 nov")))
-                                .put(Emailv31.Message.SUBJECT, "Subject")
-                                .put(Emailv31.Message.HTMLPART, "<h1>" + textMessage + "</h1>")));
-        try {
-            client.post(request);
-        } catch (MailjetException e) {
-            throw new RuntimeException(e);
+            currentDateTime = LocalDateTime.now();
+            if(startTime.plusMinutes(1) == currentDateTime){
+                System.out.println("message no send, time is over 1 minute");
+                break;
+            }
+            ClientOptions options = ClientOptions.builder()
+                    .apiKey(name)
+                    .apiSecretKey(password)
+                    .build();
+
+            MailjetClient client = new MailjetClient(options);
+            MailjetRequest request = new MailjetRequest(Emailv31.resource)
+                    .property(Emailv31.MESSAGES, new JSONArray()
+                            .put(new JSONObject()
+                                    .put(Emailv31.Message.FROM, new JSONObject()
+                                            .put("Email", "isicju@gmail.com")
+                                            .put("Name", "Me"))
+                                    .put(Emailv31.Message.TO, new JSONArray()
+                                            .put(new JSONObject()
+                                                    .put("Email", recipient)
+                                                    .put("Name", "Java course 2022 nov")))
+                                    .put(Emailv31.Message.SUBJECT, "Subject")
+                                    .put(Emailv31.Message.HTMLPART, "<h1>" + textMessage + "</h1>")));
+            try {
+                client.post(request);
+            } catch (MailjetException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
-    public static void main(String[] args) {
-        String username = "isicju@gmail.com";
-        String password = "MjHqfCWBKh63W12Ognw5aM4XzR";
+    public static void main1(String[] args) {
+        String username = "";
+        String password = "";
 
         String phone = "";
         String message = "testfromjavacourse";
