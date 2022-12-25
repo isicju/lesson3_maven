@@ -25,7 +25,7 @@ public class EmailMessage {
             throw new RuntimeException("message text: " + textMessage + " is invalid!");
         }
         if (!EmailValidationUtils.isGmail(email)){
-            throw new IllegalArgumentException("Email notifications supports only @gmail.com recipients");
+            throw new IllegalArgumentException("Email notifications supports only @gmail.com recipients. Your address : " +email);
         }
         this.email = email;
         this.textMessage = textMessage;
