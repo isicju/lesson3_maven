@@ -12,14 +12,28 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class IntegrationWithHttpServer {
+/**
+ * The IntegrationWithHttpServer class represent connection with URL to collect data from it
+ */
 
+public class IntegrationWithHttpServer {
+    /**
+     * Create list of Person that have in {@code resourceURL}.
+     * @throws  RuntimeException
+     *          If no connection with {@code resourceURL}.
+     */
     public static List<Person> createList(String resourceURL) {
         checkConnection(resourceURL);
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.getForEntity(resourceURL, String.class);
         return Arrays.asList(new Gson().fromJson(response.getBody(), Person[].class));
     }
+
+    /**
+     * Create list of Person that have in {@code resourceURL} from CSV format.
+     * @throws  RuntimeException
+     *          If no connection with {@code resourceURL}.
+     */
 
     public static List<Person> createListCSV(String resourceURL) {
         checkConnection(resourceURL);
@@ -33,6 +47,12 @@ public class IntegrationWithHttpServer {
         }
         return personList;
     }
+
+    /**
+     * Check that has connection with {@code resourceURL}.
+     * @throws  RuntimeException
+     *          If no connection with {@code resourceURL}.
+     */
 
     private static void checkConnection(String resourceURL) {
         try {
