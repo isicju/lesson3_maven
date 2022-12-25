@@ -14,9 +14,9 @@ public class ListService<E> {
         return list.size();
     }
 
-    public long getElementFroTheMiddle(int index) {
+    public long getElementFromTheMiddle(int index) {
         long before = System.currentTimeMillis();
-        list.get(index);
+        list.get(list.size() / 2);
         long after = System.currentTimeMillis();
         return after - before;
     }
@@ -24,7 +24,7 @@ public class ListService<E> {
     public long getElementFromTheEnd(int index) {
         long before = System.currentTimeMillis();
 
-        // implementation
+        list.get(list.size() - 1);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -33,7 +33,7 @@ public class ListService<E> {
     public long getElementFromTheBegging(int index) {
         long before = System.currentTimeMillis();
 
-        // implementation
+        list.get(0);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -42,7 +42,7 @@ public class ListService<E> {
     public long checkContainsElement(Object element) {
         long before = System.currentTimeMillis();
 
-        // implementation
+        list.contains(element);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -51,7 +51,7 @@ public class ListService<E> {
     public long addElementFromBegging(E element) {
         long before = System.currentTimeMillis();
 
-        // implementation
+        list.add(0, element);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -60,7 +60,7 @@ public class ListService<E> {
     public long addElementToTheMiddle(E element) {
         long before = System.currentTimeMillis();
 
-        // implementation
+        list.add(list.size() / 2, element);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -69,7 +69,7 @@ public class ListService<E> {
     public long addElementToTheEnd(E element) {
         long before = System.currentTimeMillis();
 
-        // implementation
+        list.add(list.size(), element);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -78,7 +78,7 @@ public class ListService<E> {
     public long deleteElementFromBegging(int index) {
         long before = System.currentTimeMillis();
 
-        // implementation
+        list.remove(0);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -87,7 +87,7 @@ public class ListService<E> {
     public long deleteElementFromMiddle(int index) {
         long before = System.currentTimeMillis();
 
-        // implementation
+        list.remove(list.size() / 2);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -96,7 +96,7 @@ public class ListService<E> {
     public long deleteElementFromEnd(int index) {
         long before = System.currentTimeMillis();
 
-        // implementation
+        list.remove(list.size() - 1);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -105,7 +105,7 @@ public class ListService<E> {
     public long deleteElementFromList(E element) {
         long before = System.currentTimeMillis();
 
-        // implementation
+        list.remove(element);
 
         long after = System.currentTimeMillis();
         return after - before;
