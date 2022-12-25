@@ -17,29 +17,32 @@ import java.util.Objects;
  */
 
 public class IntegrationWithHttpServer {
+
+    static RestTemplate restTemplate = new RestTemplate();
     /**
      * Create list of Person that have in {@code resourceURL}.
-     * @throws  RuntimeException
-     *          If no connection with {@code resourceURL}.
+     *
+     * @throws RuntimeException
+     * If no connection with {@code resourceURL}.
      */
     public static List<Person> createList(String resourceURL) {
         checkConnection(resourceURL);
-        RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.getForEntity(resourceURL, String.class);
+        checkNPE(response);
         return Arrays.asList(new Gson().fromJson(response.getBody(), Person[].class));
     }
 
     /**
      * Create list of Person that have in {@code resourceURL} from CSV format.
-     * @throws  RuntimeException
-     *          If no connection with {@code resourceURL}.
+     *
+     * @throws RuntimeException If no connection with {@code resourceURL}.
      */
 
     public static List<Person> createListCSV(String resourceURL) {
         checkConnection(resourceURL);
-        RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.getForEntity(resourceURL, String.class);
-        String[] listSplit = Objects.requireNonNull(response.getBody()).split(";");
+        checkNPE(response);
+        String[] listSplit = response.getBody().split(";");
         List<Person> personList = new ArrayList<>();
         for (String s : listSplit) {
             String[] dataFromUser = s.split(",");
@@ -49,9 +52,21 @@ public class IntegrationWithHttpServer {
     }
 
     /**
+     * Check that {@code response} has data.
+     *
+     * @throws NullPointerException If no connection with {@code resourceURL}.
+     */
+
+    public static void checkNPE(ResponseEntity<String> response) {
+        if (response == null || response.getBody() == null) {
+            throw new NullPointerException("Content on site is null");
+        }
+    }
+
+    /**
      * Check that has connection with {@code resourceURL}.
-     * @throws  RuntimeException
-     *          If no connection with {@code resourceURL}.
+     *
+     * @throws RuntimeException If no connection with {@code resourceURL}.
      */
 
     private static void checkConnection(String resourceURL) {
