@@ -2,12 +2,11 @@ package org.example.lists;
 
 import java.util.List;
 
-public class ListService<T> {
+public class ListService<E> {
 
-    List<T> list;
+    private List<E> list;
 
-
-    public ListService(List<T> list) {
+    public ListService(List<E> list) {
         this.list = list;
     }
 
@@ -49,7 +48,7 @@ public class ListService<T> {
         return after - before;
     }
 
-    public long addElementFromBegging(int index) {
+    public long addElementFromBegging(E element) {
         long before = System.currentTimeMillis();
 
         // implementation
@@ -58,7 +57,7 @@ public class ListService<T> {
         return after - before;
     }
 
-    public long addElementToTheMiddle(int index) {
+    public long addElementToTheMiddle(E element) {
         long before = System.currentTimeMillis();
 
         // implementation
@@ -67,7 +66,7 @@ public class ListService<T> {
         return after - before;
     }
 
-    public long addElementToTheEnd(int index) {
+    public long addElementToTheEnd(E element) {
         long before = System.currentTimeMillis();
 
         // implementation
@@ -95,6 +94,15 @@ public class ListService<T> {
     }
 
     public long deleteElementFromEnd(int index) {
+        long before = System.currentTimeMillis();
+
+        // implementation
+
+        long after = System.currentTimeMillis();
+        return after - before;
+    }
+
+    public long deleteElementFromList(E element) {
         long before = System.currentTimeMillis();
 
         // implementation
