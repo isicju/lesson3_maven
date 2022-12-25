@@ -48,7 +48,7 @@ public class ListService<E> {
         return after - before;
     }
 
-    public long addElementFromBegging(E element) {
+    public long addElementFromBegging(E element, int index) {
         long before = System.currentTimeMillis();
 
         // implementation
@@ -57,7 +57,7 @@ public class ListService<E> {
         return after - before;
     }
 
-    public long addElementToTheMiddle(E element) {
+    public long addElementToTheMiddle(E element, int index) {
         long before = System.currentTimeMillis();
 
         // implementation
@@ -66,7 +66,7 @@ public class ListService<E> {
         return after - before;
     }
 
-    public long addElementToTheEnd(E element) {
+    public long addElementToTheEnd(E element,int index) {
         long before = System.currentTimeMillis();
 
         // implementation
