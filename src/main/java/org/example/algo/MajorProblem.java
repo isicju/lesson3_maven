@@ -1,15 +1,31 @@
 package org.example.algo;
 
-public class MajorProblem {
-// Для заданного массива вернуть число которое встречается чаще всех остальных
-//Input : [2, 8, 7, 2, 2, 5, 2, 3, 1, 2, 2]
-//Output: 2
-//
-//Input : [1, 3, 1, 1]
-//Output: 1
+import java.util.HashMap;
 
-    private int findMajorityElement(int[] input){
-        return 0;
+public class MajorProblem {
+
+    // O(N) .
+    // Можно реализовать через два массива по тому же принципу.
+    public static int findMajorityElement(int[] input){
+            //Map <integer, number of times it appears in the array>
+        HashMap<Integer, Integer> numberTimesAppears = new HashMap<>();
+
+        for (int i = 0; i < input.length; i++) {
+            // Method increase the value for the current integer or put 1 by default
+            numberTimesAppears.merge(input[i], 1, (prev, one) -> prev +1);
+        }
+
+        int maxNum = 0;
+        int maxTimes = 0;
+
+        for (Integer number : numberTimesAppears.keySet()){
+            int numTimes = numberTimesAppears.get(number);
+            if(maxNum < numTimes){
+                maxNum = number;
+                maxTimes = numTimes;
+            }
+        }
+        return maxNum;
     }
 
 }
