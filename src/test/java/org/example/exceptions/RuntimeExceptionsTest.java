@@ -56,6 +56,18 @@ public class RuntimeExceptionsTest {
         );
 
     }
+    @DisplayName("classCastException: Verifying business-logic with not-integer inputs while number expected")
+    @Test
+    void classCastTest() {
+        RuntimeExceptions runtimeExceptions = new RuntimeExceptions();
+
+        assertThrows(
+                ClassCastException.class, () ->
+                        runtimeExceptions.saveFavouriteNumber2("7"),
+                "Expected, saveFavouriteNumber2() to throw, but it didn't"
+        );
+
+    }
 
 
 }

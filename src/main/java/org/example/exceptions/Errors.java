@@ -1,12 +1,41 @@
 package org.example.exceptions;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 // Throws an error
 public class Errors {
 
+    public static void throwsOOOException() {
+        // Example case: we are making a logs incorrectly.Instead of making writes
+        // each time, we collect them till certain amount and write them.
+        // Unfortunately, we have not matched the max size of logs before
+        // writing to file.
+
+        Map<String, Long> logsInfo = new HashMap<>();
+        for (long i = 0; i < Long.MAX_VALUE; i++) {
+            logsInfo.put(new Date().toString(), i);
+        }
+
+        // *Save logs somewhere*
+    }
+
+    public static void throwsStackOverFlowError() {
+        // Example case: making fibonacci for the first time
+        fibonacci(100000000000000L);
+    }
+    private static int fibonacci(Long n)  {
+        if(n == 0)
+            return 0;
+        else if(n == 1)
+            return 1;
+        else
+            return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+
     public static void shutDown(String password) {
-        // Case: we are using String-pull(insecure) to collect important data,
+        // Example case: we are using String-pull(insecure) to collect important data,
         // and we've found someone stealing the data, so admin shutdown a server;
 
         if (password.equals("HelloWorld")) {

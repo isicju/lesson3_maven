@@ -3,6 +3,8 @@ package org.example.exceptions;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Integer.*;
+
 public class RuntimeExceptions {
 
     private List<String> getNotNullStringList(int length) {
@@ -29,7 +31,7 @@ public class RuntimeExceptions {
     }
 
     public void throwsArrayIndexOutOfBoundsException() {
-        // Init an stringList with some strings length 5;
+        // Example case: looking through an array through an infinite loop
         List<String> myList = getNotNullStringList(5);
         int i = 0;
         while (true) {
@@ -40,10 +42,10 @@ public class RuntimeExceptions {
 
     // Throws NumberFormatException
     public void saveFavouriteNumber(String favouriteNumber) {
-        // **Service: enter please your favourite number** //
-        Integer aIntObj = Integer.valueOf(favouriteNumber);
-        // Adding commercial info to database
+        //Example case : Service: enter please your favourite number
+        Integer aIntObj = valueOf(favouriteNumber);
 
+        // Adding commercial info to database
     }
 
     // Throws IllegalArgumentException
@@ -53,9 +55,16 @@ public class RuntimeExceptions {
         }
     }
 
+    // Throws ClassCastException
+    public void saveFavouriteNumber2(Object myParameter) {
+        //Example case : Service takes your favourite number
+        // and add it to a database. Trainee added an object to signature.
 
-
-    public static void throwsClassCastException() {
+        if (myParameter == null) {
+            throw new IllegalArgumentException("Parameter 'myParameter' cannot be null");
+        }
+        Integer favouriteInteger = (Integer) myParameter;
+        // Add commercial info to database;
 
     }
 }

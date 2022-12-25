@@ -15,8 +15,25 @@ public class ErrorsTest {
                 Error.class,() ->  Errors.shutDown("HelloWorld"),
                 "Expected, shutDown() to throw Error, but it didn't"
         );
-
-
     }
+
+    @DisplayName("StackOverFlow: infinite recursion")
+    @Test()
+    void throwsStackOverFlowErrorTest() {
+        assertThrows(
+                StackOverflowError.class, Errors::throwsStackOverFlowError,
+                "Expected, shutDown() to throw Error, but it didn't"
+        );
+    }
+    @DisplayName("OOO: Infinite map")
+    @Test()
+    void throwsOOOException() {
+        assertThrows(
+                OutOfMemoryError.class, Errors::throwsOOOException,
+                "Expected, shutDown() to throw Error, but it didn't"
+        );
+    }
+
+
 }
 
