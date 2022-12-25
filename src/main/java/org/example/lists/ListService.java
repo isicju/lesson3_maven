@@ -69,7 +69,7 @@ public class ListService<E> {
     public long addElementToTheEnd(E element) {
         long before = System.currentTimeMillis();
 
-        list.add(list.size(), element);
+        list.add(element);
 
         long after = System.currentTimeMillis();
         return after - before;

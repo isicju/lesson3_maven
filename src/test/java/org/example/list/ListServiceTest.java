@@ -35,7 +35,7 @@ public class ListServiceTest extends DefaultTest {
         long totalTimeArray = 0;
         long totalTimeLinked = 0;
         System.out.println("-----------GET ELEMENT FROM THE MIDDLE 5K times-----------");
-        for (int i = 0; i < 5000; i++) {
+        for (int i = 0; i < 5_000; i++) {
             totalTimeArray = totalTimeArray + arrayBasedService.getElementFromTheMiddle(arrayBasedService.getSize() / 2);
             totalTimeLinked = totalTimeLinked + linkedListBasedService.getElementFromTheMiddle(arrayBasedService.getSize() / 2);
 
@@ -82,13 +82,13 @@ public class ListServiceTest extends DefaultTest {
         long totalTimeLinked = 0;
         System.out.println("-----------Check Contains Element 1M times-----------");
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 1_000; i++) {
             totalTimeArray = totalTimeArray + arrayBasedService.checkContainsElement(1984);
             totalTimeLinked = totalTimeLinked + linkedListBasedService.checkContainsElement(1984);
         }
 
-        System.out.println("ARRAYLIST: " + totalTimeArray / 1_000_000f);
-        System.out.println("LINKEDLIST: " + totalTimeLinked / 1_000_000f);
+        System.out.println("ARRAYLIST: " + totalTimeArray / 1_000f);
+        System.out.println("LINKEDLIST: " + totalTimeLinked / 1_000f);
     }
 
     @Test
@@ -192,14 +192,14 @@ public class ListServiceTest extends DefaultTest {
 
         long totalTimeArray = 0;
         long totalTimeLinked = 0;
-        System.out.println("-----------Delete Element From List 1K times-----------");
+        System.out.println("-----------Delete Element From List 500 times-----------");
 
-        for (int i = 0; i < 1_000; i++) {
+        for (int i = 0; i < 500; i++) {
             totalTimeArray = totalTimeArray + arrayBasedService.deleteElementFromList("1984");
             totalTimeLinked = totalTimeLinked + linkedListBasedService.deleteElementFromList("1984");
         }
 
-        System.out.println("ARRAYLIST: " + totalTimeArray / 1_000f);
-        System.out.println("LINKEDLIST: " + totalTimeLinked / 1_000f);
+        System.out.println("ARRAYLIST: " + totalTimeArray / 500f);
+        System.out.println("LINKEDLIST: " + totalTimeLinked / 500f);
     }
 }
