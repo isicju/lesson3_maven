@@ -4,15 +4,15 @@ import java.util.HashMap;
 
 public class MajorProblem {
 
-    // O(N) .
-    // Можно реализовать через два массива по тому же принципу.
+    // Complexity: O(N)
     public static int findMajorityElement(int[] input){
             //Map <integer, number of times it appears in the array>
+            // It can be implemented through two arrays on the same principle.
         HashMap<Integer, Integer> numberTimesAppears = new HashMap<>();
 
-        for (int i = 0; i < input.length; i++) {
+        for (int j : input) {
             // Method increase the value for the current integer or put 1 by default
-            numberTimesAppears.merge(input[i], 1, (prev, one) -> prev +1);
+            numberTimesAppears.merge(j, 1, (prev, one) -> prev + 1);
         }
 
         int maxNum = 0;
