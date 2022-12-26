@@ -10,28 +10,21 @@ import java.net.InetSocketAddress;
 
 public class Server {
 
-    public static HttpServer server;
+    private final HttpServer server;
+    private String body = "";
 
-
-    public static void createHttpServer(Integer port, String path) throws IOException {
+    public Server(Integer port, String path) throws IOException {
         server = HttpServer.create(new InetSocketAddress(port), 0);
         HttpContext context = server.createContext("/" + path); //change path to desirable
-        context.setHandler(Server::handleRequest);
+        context.setHandler(this::handleRequest);
         server.start();
     }
 
-    public static void downServer() {
-        checkServer();
+    public void downServer() {
         server.stop(0);
     }
 
-    private static void checkServer() {
-        if (server == null) {
-            throw new NullPointerException("Server is not running");
-        }
-    }
-
-    private static void handleRequest(HttpExchange exchange) throws IOException {
+    private void handleRequest(HttpExchange exchange) throws IOException {
         String content = getReturnString();
         if (content != null) {
             exchange.sendResponseHeaders(200, content.getBytes().length);
@@ -41,7 +34,11 @@ public class Server {
         }
     }
 
-    private static String getReturnString() {
-        return "{\"data\":\"123\"}";
+    private String getReturnString() {
+        return this.body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 }

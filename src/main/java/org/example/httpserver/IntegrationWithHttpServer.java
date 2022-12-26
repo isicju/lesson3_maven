@@ -75,7 +75,7 @@ public class IntegrationWithHttpServer {
             URLConnection myURLConnection = myURL.openConnection();
             myURLConnection.connect();
         } catch (IOException e) {
-            throw new RuntimeException("Cannot connect with resource");
+            throw new IllegalStateException("Cannot connect with resource");
         }
     }
 
@@ -101,6 +101,15 @@ public class IntegrationWithHttpServer {
         @Override
         public int hashCode() {
             return Objects.hash(name, id, age);
+        }
+
+        @Override
+        public String toString() {
+            return "{" +
+                    "name='" + name + '\'' +
+                    ", id=" + id +
+                    ", age=" + age +
+                    '}';
         }
     }
 
