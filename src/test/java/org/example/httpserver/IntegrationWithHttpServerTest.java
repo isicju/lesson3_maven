@@ -16,7 +16,7 @@ class IntegrationWithHttpServerTest extends DefaultTest {
     @Test
     @DisplayName("Checks that have connection with resource")
     public void isNoConnectionWithSite() {
-        String resourceURL = "http://0/users";
+        String resourceURL = "http://185.106.92.99:81111080/users";
         RuntimeException exception = assertThrows(RuntimeException.class, () -> IntegrationWithHttpServer.createList(resourceURL));
         assertEquals("Cannot connect with resource", exception.getMessage());
     }
