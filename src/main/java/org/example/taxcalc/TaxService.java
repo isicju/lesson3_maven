@@ -23,13 +23,16 @@ public class TaxService {
     }
 
     private void validateUser(User user) {
-        if (user == null) throw new UserValidationException(" user is empty!", user);
+        if (user == null) throw new UserValidationException(" user is empty!", null);
         if (!regionMaps.containsKey(user.getRegion())) {
             throw new UserValidationException("region is not available! ", user);
         }
         if (user.getRegion() == null) throw new UserValidationException(" region is empty!", user);
         if (user.getMonthOfWork() == null) throw new UserValidationException(" work duration is empty!", user);
         if (user.getYearIncome() == null) throw new UserValidationException(" year income is empty!", user);
+        if (user.getFullName() == null) throw new UserValidationException(" full name is empty!", user);
+        if (user.getYearIncome() < 0) throw new UserValidationException(" income can not be negative!", user);
+        if (user.getMonthOfWork() < 0) throw new UserValidationException(" months of work can not be negative!", user);
     }
 
 }
