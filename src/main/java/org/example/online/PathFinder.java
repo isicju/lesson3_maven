@@ -3,34 +3,49 @@ package org.example.online;
 public class PathFinder {
 
     public boolean hasConnection(String head, String tail, String[] words) {
-        if(!isValidInputHeadAndTail(head,tail)) return false;
-        String current = head;
-        for (String nextCurrent : words) {
-           if (!hasOneCharDifference(current, nextCurrent)) {
-                break;
+        if (!isValidPathWordInputs(head, tail, words)) return false;
+
+        String currentElement = head;
+        StringBuilder chain = new StringBuilder(" -> ");
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].equals("***")) continue;
+            for (int j = 0; j < words.length; j++) {
+                if (hasOneCharDifference(currentElement, words[j])) {
+                    currentElement = words[j];
+                    words[j] = "***";
+                    break;
+                }
             }
-            current = nextCurrent;
+            chain.append(currentElement).append(" -> ");
         }
-        return hasOneCharDifference(current, tail);
+        System.out.println(head + chain + tail);
+        return hasOneCharDifference(currentElement, tail);
     }
 
-    private boolean isValidInputHeadAndTail(String head, String tail) {
-        boolean isValidHead = head != null && head.length() == 3;
-        boolean isValidTail = tail != null && tail.length() == 3;
-        return isValidTail && isValidHead;
+    private static boolean isValidPathWordInputs(String begging, String ending, String[] elements) {
+        if (begging == null || begging.isEmpty()) return false;
+        if (ending == null || ending.isEmpty()) return false;
+        if (elements == null || elements.length == 0) return false;
+        for (String element : elements) {
+            if (element == null || element.isEmpty()) return false;
+        }
+        return true;
     }
 
-    public boolean hasOneCharDifference(String left, String right) {
-        //3 comparison
+    private static boolean hasOneCharDifference(String left, String right) {
         byte[] leftBytes = left.getBytes();
         byte[] rightBytes = right.getBytes();
-        int diffCount = 0;
+        boolean hasOneCharDifference = false;
         for (int i = 0; i < leftBytes.length; i++) {
-            if (leftBytes[i] != rightBytes[i]) {
-                diffCount = diffCount + 1;
+            if (rightBytes[i] != leftBytes[i]) {
+                if (hasOneCharDifference) {
+                    return false;
+                }
+                hasOneCharDifference = true;
             }
         }
-        return diffCount == 1;
+        return true;
     }
-
 }
+
+// Оценка сложности алгоритма: O(n^3)

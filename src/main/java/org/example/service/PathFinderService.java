@@ -5,21 +5,21 @@ public class PathFinderService {
     public static boolean hasConnectionBetweenTwoWords(String begging, String ending, String[] elements) {
         if (!isValidPathWordInputs(begging, ending, elements)) return false;
 
-        String currentElement = begging;
-        StringBuilder chain = new StringBuilder(" -> ");
-        for (int i = 0; i < elements.length; i++) {
-            if (elements[i].equals("***")) continue;
-            for (int j = 0; j < elements.length; j++) {
-                if (hasOneCharDifference(currentElement, elements[j])) {
-                    currentElement = elements[j];
-                    elements[j] = "***";
-                    break;
-                }
+
+        String[] fullSequence = new String[elements.length + 2];
+        System.arraycopy(elements, 0, fullSequence, 1, elements.length);
+        fullSequence[0] = begging;
+        fullSequence[elements.length + 1] = ending;
+
+
+        String previous = null;
+        for (String current : fullSequence) {
+            if (previous != null && !hasOneCharDifference(previous, current)) {
+                return false;
             }
-            chain.append(currentElement).append(" -> ");
+            previous = current;
         }
-        System.out.println(begging + chain + ending);
-        return hasOneCharDifference(currentElement, ending);
+        return true;
     }
 
     private static boolean isValidPathWordInputs(String begging, String ending, String[] elements) {
@@ -46,6 +46,5 @@ public class PathFinderService {
         }
         return true;
     }
-}
 
-// Оценка сложности алгоритма: O(n^3)
+}
