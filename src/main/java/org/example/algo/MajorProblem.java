@@ -11,6 +11,7 @@ public class MajorProblem {
 //Output: 1
 
     public static int findMajorityElement(int[] input) {
+        // O(N) algorithm complexity
         int currentMaxValue = 0;
         try {
             Arrays.sort(input);
