@@ -1,11 +1,16 @@
 package org.example;
 
+import org.example.algo.MajorProblem;
+
 import java.io.FileNotFoundException;
 import java.util.Date;
 
 public class Main {
 
     public static void main(String[] args) {
+        int[] input = new int[]{2, 8, 7, 2, 2, 5, 2, 3, 1, 2, 2};
+        MajorProblem.findMajorityElement(input);
+
         // void
         // primitive
         // object - including null
