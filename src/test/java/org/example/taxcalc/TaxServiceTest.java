@@ -57,7 +57,7 @@ public class TaxServiceTest extends DefaultTest {
         assertEquals(exception.getUser(), validUserFromUS);
     }
 
-    @DisplayName("Verifying user getter")
+    @DisplayName("Verifying user setter")
     @Test
     public void userSetterTest(){
         User first = new User(Region.US, "John Smith",  123000, 12);
@@ -65,5 +65,26 @@ public class TaxServiceTest extends DefaultTest {
         UserValidationException exception = new UserValidationException("", first);
         exception.setUser(second);
         assertEquals(exception.getUser(), second);
+    }
+
+    @DisplayName("Verifying user with zero yearIncome")
+    @Test
+    public void zeroIncomeTest(){
+        User first = new User(Region.US, "John Smith",  0, 12);
+        assertEquals(first.getYearIncome(), 0);
+    }
+
+    @DisplayName("Verifying user with zero months of work")
+    @Test
+    public void zeroMonthOfWorkTest(){
+        User first = new User(Region.US, "John Smith",  123123, 0);
+        assertEquals(first.getMonthOfWork(), 0);
+    }
+
+    @DisplayName("Verifying user with empty fullName")
+    @Test
+    public void emptyFullNameTest(){
+        User first = new User(Region.US, "",  123123, 123123);
+        assertEquals(first.getFullName(), "");
     }
 }

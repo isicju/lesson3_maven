@@ -12,27 +12,19 @@ public class MajorProblem {
 
     public static int findMajorityElement(int[] input) {
         // O(N) algorithm complexity
-        int currentMaxValue = 0;
-        try {
-            Arrays.sort(input);
-            currentMaxValue = input[0];
-            int currentMaxValueCounter = 1;
-            int potentialMaxValueCounter = 1;
-            currentMaxValue = 1;
-
-            for (int i = 0; i < input.length - 1; i++) {
-                if (input[i] == input[i + 1]) {
-                    potentialMaxValueCounter++;
-                } else {
-                    if (currentMaxValueCounter < potentialMaxValueCounter) {
-                        currentMaxValueCounter = potentialMaxValueCounter;
-                        potentialMaxValueCounter = 1;
-                        currentMaxValue = input[i];
-                    } else potentialMaxValueCounter = 1;
-                }
+        Arrays.sort(input);
+        int currentMaxValue = input[0];
+        int currentMaxValueCounter = 1;
+        int potentialMaxValueCounter = 1;
+        for (int i = 0; i < input.length - 1; i++) {
+            if (input[i] == input[i + 1]) potentialMaxValueCounter++;
+            else {
+                if (currentMaxValueCounter < potentialMaxValueCounter) {
+                    currentMaxValueCounter = potentialMaxValueCounter;
+                    potentialMaxValueCounter = 1;
+                    currentMaxValue = input[i];
+                } else potentialMaxValueCounter = 1;
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Array is null!");
         }
         return currentMaxValue;
     }

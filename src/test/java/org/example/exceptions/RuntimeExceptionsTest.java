@@ -11,7 +11,7 @@ public class RuntimeExceptionsTest extends DefaultTest {
         RuntimeExceptions runtimeExceptions = new RuntimeExceptions();
         assertThrows(
                 NullPointerException.class,
-                () -> runtimeExceptions.throwsNullPointerException(),
+                runtimeExceptions::throwsNullPointerException,
                 "Had to trow an exception but it didn't"
         );
     }
@@ -21,7 +21,17 @@ public class RuntimeExceptionsTest extends DefaultTest {
         RuntimeExceptions runtimeExceptions = new RuntimeExceptions();
         assertThrows(
                 ArrayIndexOutOfBoundsException.class,
-                () -> runtimeExceptions.throwsArrayIndexOutOfBoundsException(),
+                runtimeExceptions::throwsArrayIndexOutOfBoundsException,
+                "Had to trow an exception but it didn't"
+        );
+    }
+
+    @Test
+    void numberFormatExceptionTesting() {
+        RuntimeExceptions runtimeExceptions = new RuntimeExceptions();
+        assertThrows(
+                NumberFormatException.class,
+                runtimeExceptions::throwsNumberFormatException,
                 "Had to trow an exception but it didn't"
         );
     }
@@ -31,7 +41,7 @@ public class RuntimeExceptionsTest extends DefaultTest {
         RuntimeExceptions runtimeExceptions = new RuntimeExceptions();
         assertThrows(
                 IllegalArgumentException.class,
-                () -> runtimeExceptions.throwsIllegalArgumentException(),
+                runtimeExceptions::throwsIllegalArgumentException,
                 "Had to trow an exception but it didn't"
         );
     }

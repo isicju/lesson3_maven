@@ -26,7 +26,6 @@ public class RuntimeExceptions {
     public static void throwsClassCastException(){
         String[] strArray = new String[] { "John", "Snow" };
         ArrayList<String> strList = (ArrayList<String>) Arrays.asList(strArray);
-        System.out.println("String list: " + strList);
     }
 
 }

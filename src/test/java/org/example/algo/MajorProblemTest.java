@@ -19,6 +19,14 @@ public class MajorProblemTest extends DefaultTest {
         int rightOutput = 1;
         assertEquals(MajorProblem.findMajorityElement(input), rightOutput);
     }
+
+    @Test
+    public void oneNumberEverywhereTest() {
+        int[] input = new int[]{10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
+        int rightOutput = 10;
+        assertEquals(MajorProblem.findMajorityElement(input), rightOutput);
+    }
+
     @Test
     public void nullInArrayTest() {
         int[] input = new int[0];
@@ -26,6 +34,10 @@ public class MajorProblemTest extends DefaultTest {
                 () -> MajorProblem.findMajorityElement(input),
                 "Had to trow an exception but it didn't");
     }
-    //cover all main scenarios
-
+    @Test
+    public void noRepeatInArrayTest() {
+        int[] input = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int rightOutput = 1;
+        assertEquals(MajorProblem.findMajorityElement(input), rightOutput);
+    }
 }
