@@ -4,15 +4,14 @@ import java.io.*;
 
 public class CheckedExceptions {
 
-    public void throwsFileNotFound() {
+    public void throwsFileNotFound() throws IOException {
+        File file = new File("C:\\noexistentfolder");
         try {
-            File file = new File("C:\\noexistentfolder");
             FileInputStream fis = new FileInputStream(file);
             fis.read();
         }
-        catch (IOException e) {
+        catch (FileNotFoundException e) {
             System.out.println("No file to read!");
         }
     }
-
 }
