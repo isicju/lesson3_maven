@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.URL;
+import java.nio.file.Files;
 
 public class SimpleHttpServer {
     public static void main(String[] args) throws IOException {
@@ -21,19 +22,20 @@ public class SimpleHttpServer {
 
     private static void handleRequest(HttpExchange exchange) throws IOException {
         String filePath = exchange.getRequestURI().getPath().replaceFirst("/", "");
-        String content = getFileAsString(filePath);
+        byte[] content = getFileAsString(filePath);
         if (content != null) {
-            exchange.sendResponseHeaders(200, content.getBytes().length);
+            exchange.sendResponseHeaders(200, content.length);
             OutputStream os = exchange.getResponseBody();
-            os.write(content.getBytes());
+            os.write(content);
             os.close();
         }
     }
 
-    private static String getFileAsString(String filePath) {
+    private static byte[] getFileAsString(String filePath) {
         try {
             URL resource = SimpleHttpServer.class.getClassLoader().getResource(filePath);
-            return FileUtils.readFileToString(new File(resource.toURI()), "UTF-8");
+            File file = new File(resource.toURI());
+            return Files.readAllBytes(file.toPath());
         } catch (Exception e) {
             return null;
         }
