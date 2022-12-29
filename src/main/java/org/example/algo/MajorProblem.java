@@ -8,8 +8,30 @@ public class MajorProblem {
 //Input : [1, 3, 1, 1]
 //Output: 1
 
-    private int findMajorityElement(int[] input){
-        return 0;
-    }
 
+    public int findMajorityElement(int[] input) throws NullPointerException{
+        if (input == null){
+            throw new NullPointerException("array is null!");
+        }
+
+        int maxCount = 0;
+        int number = 0;
+
+        for (int i = 0; i < input.length; i++) {
+            int count = 0;
+            for (int j = i + 1; j < input.length; j++) {
+                if (input[i] == input[j]) {
+                    count++;
+                }
+                if (count > maxCount) {
+                    maxCount = count;
+                    number = input[j];
+
+                }
+            }
+
+        }
+        return number;
+    }
 }
+
