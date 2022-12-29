@@ -12,7 +12,7 @@ import java.util.List;
 
 public class HttpServerTest {
 
-    private static List<User> users = new ArrayList<>();
+    private static List<ServerUser> users = new ArrayList<>();
 
     private static String getStaticContent(String path) {
         String filePath = extractUrl(path).trim();
@@ -29,9 +29,9 @@ public class HttpServerTest {
     }
 
     private static void initUsers() {
-        User peter = new User("Peter", 1);
-        User john = new User("John", 2);
-        User mary = new User("Mary", 3);
+        ServerUser peter = new ServerUser("Peter", 1, 32);
+        ServerUser john = new ServerUser("John", 2, 13);
+        ServerUser mary = new ServerUser("Mary", 3, 45);
         users = List.of(peter, john, mary);
     }
 
@@ -71,6 +71,4 @@ public class HttpServerTest {
             throw new IllegalArgumentException("Invalid path in url" + path);
         }
     }
-
-
 }
