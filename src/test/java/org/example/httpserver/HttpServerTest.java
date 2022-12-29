@@ -29,9 +29,9 @@ public class HttpServerTest {
     }
 
     private static void initUsers() {
-        User peter = new User("Peter", 1);
-        User john = new User("John", 2);
-        User mary = new User("Mary", 3);
+        User peter = new User("Peter", 1, 35);
+        User john = new User("John", 2, 26);
+        User mary = new User("Mary", 3, 43);
         users = List.of(peter, john, mary);
     }
 

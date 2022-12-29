@@ -1,11 +1,13 @@
 package org.example.httpserver;
 
 class User {
-    final String name;
-    final int id;
+    private String name;
+    private int id;
+    private int age;
 
-    User(String name, int id) {
+    public User(String name, int id, int age) {
         this.name = name;
         this.id = id;
+        this.age = age;
     }
 }
