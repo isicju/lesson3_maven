@@ -8,14 +8,16 @@ class App {
     boolean flagIsDone = false;
     
     public static void main(String[] args) throws ParseException, InterruptedException {
-        
-        System.out.println("works");
         App app = new App();
         app.flagIsDone = false;
         ParsingInputString parsingInputString = new ParsingInputString();
         parsingInputString.parsingJson();
     }
-    
+
+
+    // TaskScheduler -> periodically check some tasks
+
+
     public String helloWorld() {
         return "hello world";
     }

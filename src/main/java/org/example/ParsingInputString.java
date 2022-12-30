@@ -23,7 +23,7 @@ class ParsingInputString {
             System.out.println("ERROR - Empty line ");
         }
         SendingDateCalc dateCal = new SendingDateCalc();
-        dateCal.RemainingTimeCalculation(timeData, message);
+        dateCal.remainingTimeCalculation(timeData, message);
     }
 }
 

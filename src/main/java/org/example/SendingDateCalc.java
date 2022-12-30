@@ -10,7 +10,7 @@ public class SendingDateCalc {
     public boolean stop = false;
     public int deltaTimeSending = 30;
     
-    void RemainingTimeCalculation(String dateTime, String message) throws ParseException, InterruptedException {
+    void remainingTimeCalculation(String dateTime, String message) throws ParseException, InterruptedException {
         do {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             Date sendingDate = formatter.parse(dateTime);
