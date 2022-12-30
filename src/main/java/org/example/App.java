@@ -1,16 +1,22 @@
 package org.example;
 
+import java.text.ParseException;
 
-public class App {
-
-    public static void main(String[] args) {
+class App {
+    
+    String inputText = "{\"time\":\"2022-12-30 13:50\", \"label\":\"Office standup meeting\"}";
+    boolean flagIsDone = false;
+    
+    public static void main(String[] args) throws ParseException, InterruptedException {
+        
         System.out.println("works");
-
+        App app = new App();
+        app.flagIsDone = false;
+        ParsingInputString parsingInputString = new ParsingInputString();
+        parsingInputString.parsingJson();
     }
-
-
-    public String helloWorld(){
+    
+    public String helloWorld() {
         return "hello world";
     }
-
 }
