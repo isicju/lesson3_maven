@@ -20,6 +20,7 @@ public class HttpServer {
     }
 
     public static List<Users1> createListFromJson(String resourceUrl) {
+
         ResponseEntity<String> response = restTemplate.getForEntity(resourceUrl, String.class);
         return Arrays.asList(new Gson().fromJson(response.getBody(), Users1[].class));
     }

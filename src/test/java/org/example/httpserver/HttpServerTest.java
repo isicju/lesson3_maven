@@ -12,7 +12,7 @@ import java.util.List;
 
 public class HttpServerTest {
 
-    private static List<Users1> users = new ArrayList<>();
+    private static List<User> users = new ArrayList<>();
 
     private static String getStaticContent(String path) {
         String filePath = extractUrl(path).trim();
