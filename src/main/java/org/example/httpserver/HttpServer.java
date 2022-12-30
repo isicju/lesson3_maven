@@ -1,46 +1,55 @@
 package org.example.httpserver;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.*;
-import java.util.HashMap;
-import java.util.Map;
+import com.google.gson.GsonBuilder;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class HttpServer {
-    public static void main(String[] args) throws IOException {
 
-        URL url = new URL("http://185.106.92.99:8080/users");
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+    public final String SERVER = "http://185.106.92.99:8080/users";
+    public final String SERVER_CSV = "http://185.106.92.99:8080/users?format=csv";
 
-        con.setRequestMethod("GET");
+    public RestTemplate restTemplate = new RestTemplate();
 
-        Map<String, String> parameters = new HashMap<>();
-        parameters.put("param1", "val");
-
-        con.setDoOutput(true);
-        DataOutputStream out = new DataOutputStream(con.getOutputStream());
-        out.writeBytes(ParameterStringBuilder.getParamsString(parameters));
-        out.flush();
-        out.close();
+    public List<User> createUserList() {
+        ResponseEntity<String> response = restTemplate.getForEntity(SERVER, String.class);
+        if (response.getBody() == null) {
+            throw new NullPointerException("Response from the server is null");
+        }
+        return Arrays.asList(new GsonBuilder().create().fromJson(response.getBody(), User[].class));
     }
 
-    public static class ParameterStringBuilder {
-        public static String getParamsString(Map<String, String> params)
-                throws UnsupportedEncodingException {
-            StringBuilder result = new StringBuilder();
+    public List<User> createUserListCSV() {
+        ResponseEntity<String> response = restTemplate.getForEntity(SERVER_CSV, String.class);
+        if (response.getBody() == null) {
+            throw new NullPointerException("Response from the server is null");
+        }
+        List<User> users = new ArrayList<>();
+        String[] stringUser = response.getBody().split(";");
+        for (String user : stringUser) {
+            String[] userData = user.split(",");
+            users.add(new User(userData[2],
+                    Integer.parseInt(userData[0]),
+                    Integer.parseInt(userData[1])));
+        }
+        return users;
+    }
 
-            for (Map.Entry<String, String> entry : params.entrySet()) {
-                result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
-                result.append("=");
-                result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
-                result.append("&");
-            }
+    public class User {
+        private String name;
+        private int id;
+        private int age;
 
-            String resultString = result.toString();
-            return resultString.length() > 0
-                    ? resultString.substring(0, resultString.length() - 1)
-                    : resultString;
+        public User(String name, int id, int age) {
+            this.name = name;
+            this.id = id;
+            this.age = age;
         }
     }
+
+
 }
