@@ -1,18 +1,22 @@
 package org.example.httpserver;
 
+import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
-import org.apache.commons.io.FileUtils;
+import org.example.lesson7.api.UserApi;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
-import java.net.URL;
-import java.nio.file.Files;
+import java.nio.charset.StandardCharsets;
+
+import static org.example.utils.DataUtil.getFileAsByteArray;
 
 public class SimpleHttpServer {
+
+    private static UserApi userApi = UserApi.getInstance();
+
     public static void main(String[] args) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(8500), 0);
         HttpContext context = server.createContext("/");
@@ -21,24 +25,30 @@ public class SimpleHttpServer {
     }
 
     private static void handleRequest(HttpExchange exchange) throws IOException {
-        String filePath = exchange.getRequestURI().getPath().replaceFirst("/", "");
-        byte[] content = getFileAsString(filePath);
-        if (content != null) {
-            exchange.sendResponseHeaders(200, content.length);
-            OutputStream os = exchange.getResponseBody();
-            os.write(content);
-            os.close();
+        byte[] responseByteArray = null;
+        if (exchange.getRequestURI().getPath().contains("users")) {
+            responseByteArray = getApiData();
+        } else {
+            responseByteArray = getStaticData(exchange);
         }
+        sendResponse(exchange, responseByteArray);
     }
 
-    private static byte[] getFileAsString(String filePath) {
-        try {
-            URL resource = SimpleHttpServer.class.getClassLoader().getResource(filePath);
-            File file = new File(resource.toURI());
-            return Files.readAllBytes(file.toPath());
-        } catch (Exception e) {
-            return null;
-        }
+    private static byte[] getApiData() {
+        return (new Gson().toJson(userApi.getAllUsers())).getBytes(StandardCharsets.UTF_8);
+    }
+
+    private static byte[] getStaticData(HttpExchange exchange) {
+        String filePath = exchange.getRequestURI().getPath().replaceFirst("/", "");
+        byte[] content = getFileAsByteArray(filePath);
+        return content == null ? new byte[]{} : content;
+    }
+
+    private static void sendResponse(HttpExchange exchange, byte content[]) throws IOException {
+        exchange.sendResponseHeaders(200, content.length);
+        OutputStream os = exchange.getResponseBody();
+        os.write(content);
+        os.close();
     }
 
 
