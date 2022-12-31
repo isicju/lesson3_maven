@@ -8,8 +8,20 @@ public class MajorProblem {
 //Input : [1, 3, 1, 1]
 //Output: 1
 
-    private int findMajorityElement(int[] input){
-        return 0;
+// O(N^2)
+    public int findMajorityElement(int[] input) {
+        int majorityCounter = 0;
+        int majorityElement = 0;
+        for (int i = 0; i < input.length; i++) {
+            int counter = 0;
+            for (int j = i; j < input.length; j++) {
+                if (input[i] == input[j]) counter++;
+            }
+            if (counter > majorityCounter) {
+                majorityCounter = counter;
+                majorityElement = input[i];
+            }
+        }
+        return majorityElement;
     }
-
 }
