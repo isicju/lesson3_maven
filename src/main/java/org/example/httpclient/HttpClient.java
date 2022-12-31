@@ -1,4 +1,4 @@
-package org.example.httpserver;
+package org.example.httpclient;
 
 import com.google.gson.GsonBuilder;
 import org.springframework.http.ResponseEntity;
@@ -8,12 +8,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HttpServer {
+public class HttpClient {
 
-    public final String SERVER = "http://185.106.92.99:8080/users";
+    public final String SERVER;
     public final String SERVER_CSV = "http://185.106.92.99:8080/users?format=csv";
 
     public RestTemplate restTemplate = new RestTemplate();
+
+    HttpClient(String serverUrl){
+        SERVER = "http://" + serverUrl;
+    }
 
     public List<User> createUserList() {
         ResponseEntity<String> response = restTemplate.getForEntity(SERVER, String.class);
@@ -43,6 +47,30 @@ public class HttpServer {
         private String name;
         private int id;
         private int age;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
 
         public User(String name, int id, int age) {
             this.name = name;
