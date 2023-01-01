@@ -17,3 +17,13 @@ Http.onreadystatechange = (e) => {
         }
     }
 }
+
+<button style="padding: 10px; margin: 10px" type="button" className="btn btn-primary" onClick="loadCountries()">Click To
+    Load Countries
+</button>
+
+
+<button style="padding: 10px; margin: 10px" type="button" className="btn btn-primary" onClick="showSelectedCity()">Click
+    To
+    Show city on the map
+</button>
