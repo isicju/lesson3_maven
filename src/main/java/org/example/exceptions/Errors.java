@@ -10,12 +10,12 @@ public class Errors {
     public static void throwsOOOException() {
         // Example case: we are making a logs incorrectly.Instead of making writes
         // each time, we collect them till certain amount and write them.
-        // Unfortunately, we have not matched the max size of logs before
-        // writing to file.
+        // Unfortunately, made the condition when collected logs are written unreachable.
 
-        Map<String, Long> logsInfo = new HashMap<>();
-        for (long i = 0; i < Long.MAX_VALUE; i++) {
-            logsInfo.put(new Date().toString(), i);
+        Map<String, Object> logsInfo = new HashMap<>();
+        while(true){
+            Object o = new Object(); // a log
+            logsInfo.put(new Date().toString(), o);
         }
 
         // *Save logs somewhere*
