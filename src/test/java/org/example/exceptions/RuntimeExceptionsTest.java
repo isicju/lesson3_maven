@@ -7,11 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class RuntimeExceptionsTest {
 
-    @DisplayName("nullPointerTest: null.length()")
+    @DisplayName("NPE: null.length()")
     @Test
     void nullPointerTest() {
         RuntimeExceptions runtimeExceptions = new RuntimeExceptions();
-
         assertThrows(
                 NullPointerException.class,
                 runtimeExceptions::throwsNullPointerException,
@@ -23,7 +22,6 @@ public class RuntimeExceptionsTest {
     @Test
     void indexOutOfBoundTest() {
         RuntimeExceptions runtimeExceptions = new RuntimeExceptions();
-
         assertThrows(
                 IndexOutOfBoundsException.class,
                 runtimeExceptions::throwsArrayIndexOutOfBoundsException,
@@ -36,7 +34,6 @@ public class RuntimeExceptionsTest {
     @Test
     void numberFormatTest() {
         RuntimeExceptions runtimeExceptions = new RuntimeExceptions();
-
         assertThrows(
                 NumberFormatException.class, () ->
                         runtimeExceptions.saveFavouriteNumber("seven"),
@@ -48,11 +45,10 @@ public class RuntimeExceptionsTest {
     @Test
     void illegalArgumentTest() {
         RuntimeExceptions runtimeExceptions = new RuntimeExceptions();
-
         assertThrows(
                 IllegalArgumentException.class, () ->
                         runtimeExceptions.processSomethingNotNull(null),
-                "Expected, saveFavouriteNumber() to throw, but it didn't"
+                "Expected processSomethingNotNull() to throw, but it didn't"
         );
 
     }
@@ -60,11 +56,10 @@ public class RuntimeExceptionsTest {
     @Test
     void classCastTest() {
         RuntimeExceptions runtimeExceptions = new RuntimeExceptions();
-
         assertThrows(
                 ClassCastException.class, () ->
                         runtimeExceptions.saveFavouriteNumber2("7"),
-                "Expected, saveFavouriteNumber2() to throw, but it didn't"
+                "Expected saveFavouriteNumber2() to throw, but it didn't"
         );
 
     }

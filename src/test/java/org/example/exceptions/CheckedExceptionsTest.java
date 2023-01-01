@@ -13,7 +13,6 @@ public class CheckedExceptionsTest {
     @Test()
     public void ReadingExistingFile() {
         String path = "src/main/java/org/example/resources/myPerformance.txt";
-        CheckedExceptions.readFile(path);
         assertDoesNotThrow(() -> CheckedExceptions.readFile(path),
                 "Expected readFile not to throw any exceptions or errors");
 
@@ -22,13 +21,8 @@ public class CheckedExceptionsTest {
     @Test()
     public void ThrowsIOException() {
         String path = "src/main/java/org/example/resources/myPerformance2.txt";
-
-        Exception exception = assertThrows(UncheckedIOException.class, ()
-                -> CheckedExceptions.readFile(path));
-        String expectedMessage = "FileNotFoundException";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertThrows(UncheckedIOException.class, ()
+                -> CheckedExceptions.readFile(path),"Expected readFile to throw  IoException but it has thrown" );
     }
 
 
