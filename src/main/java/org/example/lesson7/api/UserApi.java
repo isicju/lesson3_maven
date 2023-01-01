@@ -10,6 +10,7 @@ import java.util.List;
 
 public class UserApi {
     private static final UserApi instance = new UserApi();
+
     private List<User> users;
 
     private UserApi() {
