@@ -16,7 +16,6 @@ import static org.example.utils.DataUtil.getFileAsByteArray;
 public class SimpleHttpServer {
 
     private static UserApi userApi = UserApi.getInstance();
-    private static CityApi countyApi = CityApi.getInstance();
 
     public static void main(String[] args) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(8500), 0);
@@ -29,8 +28,6 @@ public class SimpleHttpServer {
         byte[] responseByteArray = null;
         if (exchange.getRequestURI().getPath().contains("users")) {
             responseByteArray = getApiData();
-        } else if (exchange.getRequestURI().getPath().contains("cities")) {
-            responseByteArray = get10RandomCities();
         } else {
             responseByteArray = getStaticData(exchange);
         }
@@ -40,11 +37,6 @@ public class SimpleHttpServer {
     private static byte[] getApiData() {
         return (new Gson().toJson(userApi.getAllUsers())).getBytes(StandardCharsets.UTF_8);
     }
-
-    private static byte[] get10RandomCities() {
-        return (new Gson().toJson(countyApi.getOnlyFirst100cities())).getBytes(StandardCharsets.UTF_8);
-    }
-
 
     private static byte[] getStaticData(HttpExchange exchange) {
         String filePath = exchange.getRequestURI().getPath().replaceFirst("/", "");
