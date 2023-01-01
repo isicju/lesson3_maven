@@ -12,10 +12,14 @@ public class Errors {
         // each time, we collect them till certain amount and write them.
         // Unfortunately, made the condition when collected logs are written unreachable.
 
-        Map<String, Object> logsInfo = new HashMap<>();
+        Map<Integer, Object> logsInfo = new HashMap<>();
+        Map<Integer, Object> logsInfoCopy = new HashMap<>();
+        int i = 0;
         while(true){
+            i++;
             Object o = new Object(); // a log
-            logsInfo.put(new Date().toString(), o);
+            logsInfo.put(i, o);
+            logsInfoCopy.put(i, o);
         }
 
         // *Save logs somewhere*
