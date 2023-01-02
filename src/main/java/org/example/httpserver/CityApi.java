@@ -9,11 +9,11 @@ import lombok.Setter;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CityApi {
 
     private static CityApi instance = null;
-
 
     public List<City> getCityList() {
         File file = new File("src/main/resources/data/cities.txt");
@@ -42,16 +42,12 @@ public class CityApi {
     }
 
     public static CityApi getInstance() {
-        if (instance == null) {
+        if (Objects.isNull(instance)) {
             instance = new CityApi();
         }
         return instance;
     }
 
-    public static void main(String[] args) {
-        //valid
-        new CityApi().getCityList().forEach(System.out::println);
-    }
 
     @Getter
     @Setter

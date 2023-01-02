@@ -5,10 +5,18 @@ document.onreadystatechange = function () {
     }
 }
 
-function loadCountries() {
+function loadCities() {
     //loading cities localhost:8500/cities
     //parsing cities and adding them to citiesData
-
+    fetch("http://localhost:8500/cities")
+        .then(res => res.json())
+        .then(data => {
+            citiesData = data;
+        })
+        .then(() => {
+            console.log(citiesData);
+        });
+    console.log("Button city load");
 
 }
 
@@ -50,6 +58,7 @@ function showSelectedCity() {
             setMapLatitudeAndLongitude(cityData.latitude, cityData.longitude)
         }
     }
+    console.log("Click Show selected city on map");
 }
 
 function addCityByName(countryName) {
