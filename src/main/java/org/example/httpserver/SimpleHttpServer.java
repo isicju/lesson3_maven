@@ -21,6 +21,8 @@ public class SimpleHttpServer {
         HttpServer server = HttpServer.create(new InetSocketAddress(8500), 0);
         HttpContext context = server.createContext("/");
         context.setHandler(SimpleHttpServer::handleRequest);
+        HttpContext cityContext = server.createContext("/cities");
+        cityContext.setHandler(SimpleHttpServer::handleCityRequest);
         server.start();
     }
 
@@ -31,6 +33,12 @@ public class SimpleHttpServer {
         } else {
             responseByteArray = getStaticData(exchange);
         }
+        sendResponse(exchange, responseByteArray);
+    }
+
+    private static void handleCityRequest(HttpExchange exchange) throws IOException {
+        CityApi cityApi = CityApi.getInstance();
+        byte[] responseByteArray = cityApi.getCitiesJSONArray();
         sendResponse(exchange, responseByteArray);
     }
 
