@@ -13,13 +13,21 @@ import java.util.Objects;
 
 public class CityApi {
 
+
     private static CityApi instance = null;
+    private static int numberOfAppeals = 0;
 
     public List<City> getCityList() {
         File file = new File("src/main/resources/data/cities.txt");
         List<City> cityList = new ArrayList<>(100);
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            for (int i = 0; i < 1000; i += 10) {
+
+            // skipping numberOfAppeals*100 lines(cities)
+            for (int j = 0; j < numberOfAppeals * 100; j++) {
+                reader.readLine();
+            }
+            // reading 100 lines(cities)
+            for (int i = 0; i < 100; i++) {
                 String cityData = reader.readLine();
                 String[] data = cityData.strip().split("\t");
                 cityList.add(new City(data[1], Float.parseFloat(data[2]), Float.parseFloat(data[3])));
@@ -27,6 +35,7 @@ public class CityApi {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        numberOfAppeals += 1;
         return cityList;
     }
 
