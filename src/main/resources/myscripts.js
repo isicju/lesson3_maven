@@ -6,12 +6,11 @@ document.onreadystatechange = function () {
 }
 
 function loadCities() {
-    //loading cities localhost:8500/cities
-    //parsing cities and adding them to citiesData
+
     fetch("http://localhost:8500/cities")
         .then(res => res.json())
         .then(data => {
-            citiesData = data;
+            citiesData = citiesData.concat(data);
         })
         .then(() => {
             console.log(citiesData);
@@ -35,7 +34,7 @@ function setMapLatitudeAndLongitude(latitude, longitude) {
 
 function findCityDataByCityName(cityName) {
     let cityDataResult = null;
-    for (let cityData of citiesData){
+    for (let cityData of citiesData) {
         if (cityData.name === cityName) {
             cityDataResult = cityData;
             break;

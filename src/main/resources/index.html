@@ -10,24 +10,25 @@
             crossorigin=""></script>
 
     <script src="myscripts.js"></script>
+    <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
 <div style="padding-top: 20px">
-<!--add button that fires load coutries-->
-<!--    <button></button>-->
+    <button onclick="loadCities()" class="button1"> Load (more) cities</button>
+    <br>
+    <br>
     <div>
         <input id="currentCityNameId" list="Country" name="Country">
         <datalist id="Country">
         </datalist>
     </div>
-
-<!--    add button that fires show selected city-->
-
+    <br>
+    <br>
+    <button onclick="showSelectedCity()" class="button2"> Show selected city on map</button>
+    <br>
 </div>
-
 <div style="height: 400px; width: 400px " id="map"></div>
-
 </div>
 
 </body>
