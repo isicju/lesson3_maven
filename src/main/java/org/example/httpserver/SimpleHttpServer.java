@@ -30,7 +30,7 @@ public class SimpleHttpServer {
         if (exchange.getRequestURI().getPath().contains("users")) {
             responseByteArray = getApiData();
         } else if (exchange.getRequestURI().getPath().contains("cities")) {
-            responseByteArray = get10RandomCities();
+            responseByteArray = get100RandomCities();
         } else {
             responseByteArray = getStaticData(exchange);
         }
@@ -41,10 +41,9 @@ public class SimpleHttpServer {
         return (new Gson().toJson(userApi.getAllUsers())).getBytes(StandardCharsets.UTF_8);
     }
 
-    private static byte[] get10RandomCities() {
+    private static byte[] get100RandomCities() {
         return (new Gson().toJson(countyApi.getOnlyFirst100cities())).getBytes(StandardCharsets.UTF_8);
     }
-
 
     private static byte[] getStaticData(HttpExchange exchange) {
         String filePath = exchange.getRequestURI().getPath().replaceFirst("/", "");

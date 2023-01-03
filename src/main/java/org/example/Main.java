@@ -16,12 +16,9 @@ public class Main {
         Gson gson = new Gson();
         User user = gson.fromJson(userString, User.class);
 
-
         UserApiService myInstance = UserApiService.getInstance();
         myInstance.getUsers();
-        File userData =  DataUtil.getFileByPath("USER_DATA.json");
-        String stringContent = FileUtils.readFileToString(userData, "UTF-8");
-        System.out.println("");
+        String stringContent =  DataUtil.getFileAsString("USER_DATA.json");
     }
 
 
