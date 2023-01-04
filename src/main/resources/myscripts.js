@@ -1,4 +1,5 @@
 let citiesData = [];
+let cityNames = [];
 document.onreadystatechange = function () {
     if (document.readyState === "complete") {
         initFirstMapView();
@@ -8,8 +9,30 @@ document.onreadystatechange = function () {
 function loadCountries() {
     //loading cities localhost:8500/cities
     //parsing cities and adding them to citiesData
+    const Http = new XMLHttpRequest();
+    const url = 'http://localhost:8500/cities';
+    Http.open("GET", url);
+    Http.send();
 
+    Http.onreadystatechange = (e) => {
+        if (Http.readyState === XMLHttpRequest.DONE) {
+            const cities = JSON.parse(Http.responseText);
+            for (let i = 0; i < cities.length; i++) {
+                citiesData[i] = [cities[i].name, cities[i].latitude, cities[i].longitude];
+            }
+            for (let i = 0; i < citiesData.length; i++) {
+                cityNames[i] = cities[i].name;
+            }
+            var options = '';
+            for (var i = 0; i < cityNames.length; i++) {
+                options += '<option value="' + cityNames[i] + '" />';
+            }
+            var my_countries_list=document.getElementById('CountryDataList');
+            my_countries_list.innerHTML = options;
 
+            alert("Cities are loaded!")
+        }
+    }
 }
 
 function initFirstMapView() {
@@ -28,7 +51,7 @@ function setMapLatitudeAndLongitude(latitude, longitude) {
 function findCityDataByCityName(cityName) {
     let cityDataResult = null;
     for (let cityData of citiesData){
-        if (cityData.name === cityName) {
+        if (cityData[0] === cityName) {
             cityDataResult = cityData;
             break;
         }
@@ -43,16 +66,16 @@ function resetMap() {
 }
 
 function showSelectedCity() {
-    let cityName = document.getElementById("currentCityNameId").value;
+    let cityName = document.forms.form1.CountryChooser.value;
     if (cityName) {
         const cityData = findCityDataByCityName(cityName)
         if (cityData) {
-            setMapLatitudeAndLongitude(cityData.latitude, cityData.longitude)
+            setMapLatitudeAndLongitude(cityData[1], cityData[2])
         }
     }
 }
 
 function addCityByName(countryName) {
-    let my_list = document.getElementById("Country");
+    let my_list = document.getElementById('Country');
     my_list.innerHTML = my_list.innerHTML + '<option value="' + countryName + '">';
 }
