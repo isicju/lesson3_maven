@@ -1,0 +1,323 @@
+Subject: [PATCH] Uncommitted changes before Checkout at 04.01.23, 13:47 [Changes]
+---
+Index: src/test/java/org/example/taxcalc/TaxServiceTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/org/example/taxcalc/TaxServiceTest.java b/src/test/java/org/example/taxcalc/TaxServiceTest.java
+--- a/src/test/java/org/example/taxcalc/TaxServiceTest.java	
++++ b/src/test/java/org/example/taxcalc/TaxServiceTest.java	
+@@ -22,5 +22,18 @@
+         float valueAfterTax = taxService.calculateYearIncome(validUserFromUS);
+         Assertions.assertEquals(valueAfterTax, 100860.0f);
+     }
+-
++    @DisplayName("Verifying net salary for EU citizen with 12 month of work")
++    @Test
++    public void simpleTestEuro(){
++        User validUserFromUS = new User(Region.EU, "iogan Waise",  116000, 12);
++        float valueAfterTax = taxService.calculateYearIncome(validUserFromUS);
++        Assertions.assertEquals(valueAfterTax, 69600.0f);
++    }
++    @DisplayName("Verifying net salary for CHINA citizen with 12 month of work")
++    @Test
++    public void simpleTestChina(){
++        User validUserFromUS = new User(Region.CHINA, "Fan Li",  98000, 12);
++        float valueAfterTax = taxService.calculateYearIncome(validUserFromUS);
++        Assertions.assertEquals(valueAfterTax, 78400.0f);
++    }
+ }
+Index: src/test/java/org/example/exceptions/ErrorsTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/org/example/exceptions/ErrorsTest.java b/src/test/java/org/example/exceptions/ErrorsTest.java
+--- a/src/test/java/org/example/exceptions/ErrorsTest.java	
++++ b/src/test/java/org/example/exceptions/ErrorsTest.java	
+@@ -1,9 +1,30 @@
+ package org.example.exceptions;
+ 
+ import org.example.DefaultTest;
++import org.junit.jupiter.api.Test;
++
++import java.io.IOException;
++
++import static org.junit.jupiter.api.Assertions.assertThrows;
+ 
+ public class ErrorsTest extends DefaultTest {
+-
+-
++    @Test
++    void throwsOOOException() {
++        Errors memoryErrors = new Errors();
++        assertThrows(
++                OutOfMemoryError.class,
++                () -> memoryErrors.throwsOOOException(),
++                "Had to trown an OutOfMemoryError exception but it didn't"
++        );
++    }
++    @Test
++    void throwsStackOverFlowError() {
++        Errors memoryErrors = new Errors();
++        assertThrows(
++                StackOverflowError.class,
++                () -> memoryErrors.throwsStackOverFlowError(),
++                "Had to trown an StackOverflowError exception but it didn't"
++        );
++    }
+ 
+ }
+Index: src/main/java/org/example/exceptions/Errors.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/example/exceptions/Errors.java b/src/main/java/org/example/exceptions/Errors.java
+--- a/src/main/java/org/example/exceptions/Errors.java	
++++ b/src/main/java/org/example/exceptions/Errors.java	
+@@ -3,8 +3,23 @@
+ public class Errors {
+ 
+     public void throwsOOOException(){
++        for (int i = 0; true; ++i) {
++            new Thread() {
++                public void run() {
++                    try {
++                        Thread.sleep(1000000);
++                    } catch(InterruptedException e) { }
++                }
++            }.start();
++        }
+     }
+ 
+     public void throwsStackOverFlowError(){
++        recursiveMethod();
++    }
++    
++    static void recursiveMethod() {
++        String errror;
++        recursiveMethod();
+     }
+ }
+Index: src/test/java/org/example/exceptions/CheckedExceptionsTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/org/example/exceptions/CheckedExceptionsTest.java b/src/test/java/org/example/exceptions/CheckedExceptionsTest.java
+--- a/src/test/java/org/example/exceptions/CheckedExceptionsTest.java	
++++ b/src/test/java/org/example/exceptions/CheckedExceptionsTest.java	
+@@ -3,11 +3,20 @@
+ import org.example.DefaultTest;
+ import org.junit.jupiter.api.Test;
+ 
++import java.io.FileNotFoundException;
++
++import static org.junit.jupiter.api.Assertions.assertThrows;
++
+ public class CheckedExceptionsTest extends DefaultTest {
+ 
+     @Test
+     public void throwsFileNotFoundTest() {
+-
++        CheckedExceptions checkedExceptions = new CheckedExceptions();
++        assertThrows(
++                FileNotFoundException.class,
++                () -> checkedExceptions.throwsFileNotFoundTest(),
++                "Had to trown an FileNotFoundTest exception but it didn't"
++        );
+     }
+ 
+ }
+Index: src/main/java/org/example/exceptions/RuntimeExceptions.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/example/exceptions/RuntimeExceptions.java b/src/main/java/org/example/exceptions/RuntimeExceptions.java
+--- a/src/main/java/org/example/exceptions/RuntimeExceptions.java	
++++ b/src/main/java/org/example/exceptions/RuntimeExceptions.java	
+@@ -1,26 +1,32 @@
+ package org.example.exceptions;
+ 
++import java.util.Date;
++
+ public class RuntimeExceptions {
+-
+-    public void throwsNullPointerException(){
++    
++    public void throwsNullPointerException() {
+         String myString = null;
+         myString.length();
+     }
+-
+-    public void throwsArrayIndexOutOfBoundsException(){
+-
++    
++    public void throwsArrayIndexOutOfBoundsException() {
++        int[] myArray = new int[10];
++        for (int i = 0; i < 11; ++i) {
++            int item = myArray[i];
++        }
+     }
+-
+-    public void throwsNumberFormatException(){
+-
++    
++    public void throwsNumberFormatException() {
++        Integer intValue = Integer.parseInt("2_147_483_648");
+     }
+-
+-    public void throwsIllegalArgumentException(){
+-
++    
++    public void throwsIllegalArgumentException() {
++        Date date = new Date("error");
+     }
+-
+-    public static void throwsClassCastException(){
+-
++    
++    public void throwsClassCastException() {
++        Object error = Integer.valueOf(777);
++        String str = (String) error;
+     }
+-
++    
+ }
+Index: src/test/java/org/example/exceptions/RuntimeExceptionsTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/org/example/exceptions/RuntimeExceptionsTest.java b/src/test/java/org/example/exceptions/RuntimeExceptionsTest.java
+--- a/src/test/java/org/example/exceptions/RuntimeExceptionsTest.java	
++++ b/src/test/java/org/example/exceptions/RuntimeExceptionsTest.java	
+@@ -15,4 +15,40 @@
+                 "Had to trown an exception but it didn't"
+         );
+     }
++    @Test
++    void throwsArrayIndexOutOfBoundsException() {
++        RuntimeExceptions runtimeExceptions = new RuntimeExceptions();
++        assertThrows(
++                ArrayIndexOutOfBoundsException.class,
++                () -> runtimeExceptions.throwsArrayIndexOutOfBoundsException(),
++                "Had to trown an ArrayIndexOutOfBoundsException exception but it didn't"
++        );
++    }
++    @Test
++    void throwsNumberFormatException() {
++        RuntimeExceptions runtimeExceptions = new RuntimeExceptions();
++        assertThrows(
++                NumberFormatException.class,
++                () -> runtimeExceptions.throwsNumberFormatException(),
++                "Had to trown an NumberFormatException exception but it didn't"
++        );
++    }
++    @Test
++    void throwsIllegalArgumentException() {
++        RuntimeExceptions runtimeExceptions = new RuntimeExceptions();
++        assertThrows(
++                IllegalArgumentException.class,
++                () -> runtimeExceptions.throwsIllegalArgumentException(),
++                "Had to trown an IllegalArgumentException exception but it didn't"
++        );
++    }
++    @Test
++    void throwsClassCastException() {
++        RuntimeExceptions runtimeExceptions = new RuntimeExceptions();
++        assertThrows(
++                ClassCastException.class,
++                () -> runtimeExceptions.throwsClassCastException(),
++                "Had to trown an IClassCastException exception but it didn't"
++        );
++    }
+ }
+Index: src/main/java/org/example/online/Server.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/example/online/Server.java b/src/main/java/org/example/online/Server.java
+--- a/src/main/java/org/example/online/Server.java	
++++ b/src/main/java/org/example/online/Server.java	
+@@ -18,8 +18,8 @@
+ 
+         String messageFromClient = in.readLine();
+ 
+-        if ("hello server".equals(messageFromClient)) {
+-            clientDestinationOut.println("server received hello server word!");
++        if ("hello server !!!".equals(messageFromClient)) {
++            clientDestinationOut.println("server received " + messageFromClient);
+         } else if ("exit".equals(messageFromClient)) {
+             clientDestinationOut.println("received message from client to shutdown..");
+             clientDestinationOut.println("server will be shutdown");
+Index: src/main/java/org/example/network/Server.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/example/network/Server.java b/src/main/java/org/example/network/Server.java
+--- a/src/main/java/org/example/network/Server.java	
++++ b/src/main/java/org/example/network/Server.java	
+@@ -56,8 +56,8 @@
+                     "\n" +
+                     "<h1>My First Heading</h1>\n" +
+                     "<p>My first paragraph.</p>\n" +
+-                    "<iframe width=\"420\" height=\"315\"\n" +
+-                            "src=\"https://www.youtube.com/embed/jifUJrYPZQQ\">\n" +
++                    "<iframe width=\"630\" height=\"420\"\n" +
++                            "src=\"https://www.youtube.com/embed/hl3B4Ql8RtQ\">\n" +
+                             "</iframe>" +
+                     "</body>\n" +
+                     "</html>");
+Index: src/main/java/org/example/online/Client.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/example/online/Client.java b/src/main/java/org/example/online/Client.java
+--- a/src/main/java/org/example/online/Client.java	
++++ b/src/main/java/org/example/online/Client.java	
+@@ -34,9 +34,9 @@
+         org.example.network.Client client = new org.example.network.Client();
+         client.startConnection("127.0.0.1", 70);
+         System.out.println("sending hello server");
+-        String response = client.sendMessage("hello server");
++        String response = client.sendMessage("hello server !!!");
+ //        String response = client.sendMessage("exit");
+         System.out.println("client received from server: " + response);
+     }
+-
++    
+ }
+Index: src/main/java/org/example/exceptions/CheckedExceptions.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/example/exceptions/CheckedExceptions.java b/src/main/java/org/example/exceptions/CheckedExceptions.java
+--- a/src/main/java/org/example/exceptions/CheckedExceptions.java	
++++ b/src/main/java/org/example/exceptions/CheckedExceptions.java	
+@@ -1,9 +1,14 @@
+ package org.example.exceptions;
+ 
++import java.io.BufferedReader;
++import java.io.FileNotFoundException;
++import java.io.FileReader;
++import java.io.IOException;
++
++
+ public class CheckedExceptions {
+-
+-    public void throwsFileNotFoundTest() {
+-
++    
++    public static void throwsFileNotFoundTest() throws IOException {
++        FileReader fileReader = new FileReader("error.txt");
+     }
+-
+ }

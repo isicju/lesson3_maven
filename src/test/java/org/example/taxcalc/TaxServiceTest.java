@@ -7,14 +7,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class TaxServiceTest extends DefaultTest {
-
+    
     TaxService taxService;
-
+    
     @BeforeEach
     public void init(){
         taxService = new TaxService();
     }
-
+    
     @DisplayName("Verifying net salary for US citizen with 12 month of work")
     @Test
     public void simpleTest(){
@@ -22,5 +22,18 @@ public class TaxServiceTest extends DefaultTest {
         float valueAfterTax = taxService.calculateYearIncome(validUserFromUS);
         Assertions.assertEquals(valueAfterTax, 100860.0f);
     }
-
+    @DisplayName("Verifying net salary for EU citizen with 12 month of work")
+    @Test
+    public void simpleTestEuro(){
+        User validUserFromUS = new User(Region.EU, "iogan Waise",  116000, 12);
+        float valueAfterTax = taxService.calculateYearIncome(validUserFromUS);
+        Assertions.assertEquals(valueAfterTax, 69600.0f);
+    }
+    @DisplayName("Verifying net salary for CHINA citizen with 12 month of work")
+    @Test
+    public void simpleTestChina(){
+        User validUserFromUS = new User(Region.CHINA, "Fan Li",  98000, 12);
+        float valueAfterTax = taxService.calculateYearIncome(validUserFromUS);
+        Assertions.assertEquals(valueAfterTax, 78400.0f);
+    }
 }

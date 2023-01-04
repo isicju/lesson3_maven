@@ -1,26 +1,32 @@
 package org.example.exceptions;
 
-public class RuntimeExceptions {
+import java.util.Date;
 
-    public void throwsNullPointerException(){
+public class RuntimeExceptions {
+    
+    public void throwsNullPointerException() {
         String myString = null;
         myString.length();
     }
-
-    public void throwsArrayIndexOutOfBoundsException(){
-
+    
+    public void throwsArrayIndexOutOfBoundsException() {
+        int[] myArray = new int[10];
+        for (int i = 0; i < 11; ++i) {
+            int item = myArray[i];
+        }
     }
-
-    public void throwsNumberFormatException(){
-
+    
+    public void throwsNumberFormatException() {
+        Integer intValue = Integer.parseInt("2_147_483_648");
     }
-
-    public void throwsIllegalArgumentException(){
-
+    
+    public void throwsIllegalArgumentException() {
+        Date date = new Date("error");
     }
-
-    public static void throwsClassCastException(){
-
+    
+    public void throwsClassCastException() {
+        Object error = Integer.valueOf(777);
+        String str = (String) error;
     }
-
+    
 }

@@ -1,0 +1,29 @@
+Subject: [PATCH] Uncommitted changes before Checkout at 04.01.23, 13:47 [Changes]
+---
+Index: src/main/java/org/example/exceptions/CheckedExceptions.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/example/exceptions/CheckedExceptions.java b/src/main/java/org/example/exceptions/CheckedExceptions.java
+--- a/src/main/java/org/example/exceptions/CheckedExceptions.java	
++++ b/src/main/java/org/example/exceptions/CheckedExceptions.java	
+@@ -1,9 +1,14 @@
+ package org.example.exceptions;
+ 
++import java.io.BufferedReader;
++import java.io.FileNotFoundException;
++import java.io.FileReader;
++import java.io.IOException;
++
++
+ public class CheckedExceptions {
+-
+-    public void throwsFileNotFoundTest() {
+-
++    
++    public static void throwsFileNotFoundTest() throws IOException {
++        FileReader fileReader = new FileReader("error.txt");
+     }
+-
+ }
