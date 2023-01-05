@@ -1,5 +1,7 @@
 package org.example.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpEntity;
@@ -7,6 +9,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.example.StringValidationUtils.hasLengthMoreThan;
 import static org.example.StringValidationUtils.hasOnlyDigits;
@@ -22,13 +26,24 @@ public class SmsNotificationService implements NotificationService{
         securityHeaders = buildSecurityHeaders(userName, password);
     }
 
+    private String ConvertSMSToJson(SmsBody val) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(val);
+    }
+
     @Override
-    public void sendMessage(String phone, String text) {
+    public void sendMessage(String phone, String text)  {
         SmsBody body = new SmsBody(phone, text);
 
-        Gson gson = new Gson();
-        String validJson = gson.toJson(body);
-
+       /* Gson gson = new Gson();
+        String validJson = gson.toJson(body);*/
+        ObjectMapper mapper = new ObjectMapper();
+        String validJson = null;
+        try {
+            validJson = ConvertSMSToJson(body);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
         HttpEntity<String> request = new HttpEntity<>(validJson, securityHeaders);
         restTemplate.postForObject(SMS_URL_PROVIDER, request, String.class);
     }
@@ -48,7 +63,18 @@ public class SmsNotificationService implements NotificationService{
         String text;
         String sign = "SMS Aero";
 
+        private static final Pattern VALID_SNG =
+                Pattern.compile("^(\\+7|\\+994|\\+374|\\+375|\\+996|\\+373|\\+992|\\+998)+\\d+", Pattern.CASE_INSENSITIVE);
+
+        private static boolean isItSNG(String someNumber)
+        {
+            Matcher matcher = VALID_SNG.matcher(someNumber);
+            return matcher.find();
+        }
         public SmsBody(String number, String text) {
+            if (!isItSNG(number)) {
+                throw new RuntimeException("phone: " + number + " it is not SNG!");
+            }
             if (!hasOnlyDigits(number)) {
                 throw new RuntimeException("phone: " + number + " has invalid format!");
             }
@@ -58,6 +84,10 @@ public class SmsNotificationService implements NotificationService{
             this.number = number;
             this.text = text;
         }
+       /* public static void main(String[]args)
+        {
+            System.out.println();
+        }*/
     }
 
 }
