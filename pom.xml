@@ -167,7 +167,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        org.example.App
+                                        org.example.httpserver.SimpleHttpServer
                                     </mainClass>
                                 </manifest>
                             </archive>
