@@ -2,6 +2,8 @@
 <html>
 <head>
     <!--    maps dependencies -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
           integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
           crossorigin=""/>
@@ -13,22 +15,27 @@
 
 </head>
 <body>
-<div style="padding-top: 20px">
-<!--add button that fires load coutries-->
-<!--    <button></button>-->
+<div style="width: 400px; padding-top: 20px">
+    <!--add button that fires load coutries-->
+    <!--    <button></button>-->
+    <button type="button" class="btn btn-secondary btn-block" onclick="loadCountries(); this.blur();">Load the
+        countries
+    </button>
+
     <div>
-        <input id="currentCityNameId" list="Country" name="Country">
+        <input style="width: 100%" id="currentCityNameId" list="Country" name="Country">
         <datalist id="Country">
         </datalist>
     </div>
 
-<!--    add button that fires show selected city-->
+    <!--    add button that fires show selected city-->
+    <button type="button" class="btn btn-primary btn-block" onclick="showSelectedCity(); this.blur();">Show the city on
+        the map
+    </button>
 
 </div>
 
 <div style="height: 400px; width: 400px " id="map"></div>
-
-</div>
 
 </body>
 </html>
