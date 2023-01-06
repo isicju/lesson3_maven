@@ -5,14 +5,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+//<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PathFinderTest extends DefaultTest {
-
-
+    
+    
     @DisplayName("Verifying pathFinder with existent path")
     @Test
     public void existentPath() {
@@ -23,7 +24,7 @@ public class PathFinderTest extends DefaultTest {
         }};
         Assertions.assertTrue(PathFinderOnline.hasPath("cat", "dog", wordBetween));
     }
-
+    
     @DisplayName("Verifying pathFinder with non existent path")
     @Test
     public void nonExistentPath() {
@@ -34,7 +35,7 @@ public class PathFinderTest extends DefaultTest {
         }};
         Assertions.assertFalse(PathFinderOnline.hasPath("cat", "dog", wordBetween));
     }
-
+    
     @DisplayName("Verifying pathFinder with non existent path")
     @Test
     public void notValidPath() {
@@ -49,7 +50,7 @@ public class PathFinderTest extends DefaultTest {
         Assertions.assertTrue(wasThrown);
         Assertions.assertTrue(exceptionMessage.contains("words between"));
     }
-
+    
     @Test
     void notValidPathUsingAsserThrown() {
         RuntimeException exception = assertThrows(
@@ -59,6 +60,46 @@ public class PathFinderTest extends DefaultTest {
         );
         Assertions.assertTrue(exception.getMessage().contains("words between"));
     }
+    
+    
+    //=======
+//    public class PathFinderTest extends DefaultTest {
+        
+        @DisplayName("Test check that between cat and zoz there is a path")
+        @Test
+        public void ok() {
+            PathFinder pathFinder = new PathFinder();
+            boolean hasConnection = pathFinder.hasConnection("cat", "zoz", new String[]{"cot", "zot"});
+            Assertions.assertTrue(hasConnection);
+        }
+        
+        @DisplayName("Test check that between cat and zoz there is no path")
+        @Test
+        public void notOk() {
+            PathFinder pathFinder = new PathFinder();
+            boolean hasConnection = pathFinder.hasConnection("cat", "zoz", new String[]{"ppt", "zot"});
+            Assertions.assertFalse(hasConnection);
+        }
+        
+        @DisplayName("Test check that invalid head or tail has not path")
+        @Test
+        public void missingHead() {
+            PathFinder pathFinder = new PathFinder();
+            boolean hasConnection = pathFinder.hasConnection(null, "zoz", new String[]{"ppt", "zot"});
+            Assertions.assertFalse(hasConnection);
+            hasConnection = pathFinder.hasConnection("", "zoz", new String[]{"ppt", "zot"});
+            Assertions.assertFalse(hasConnection);
+            hasConnection = pathFinder.hasConnection("aaaa", "zoz", new String[]{"ppt", "zot"});
+            Assertions.assertFalse(hasConnection);
+        }
+        
+        @DisplayName("Test check that invalid words have not path")
+        @Test
+        public void missingWords() {
+            PathFinder pathFinder = new PathFinder();
+            boolean hasConnection = pathFinder.hasConnection(null, "zoz", null);
+            Assertions.assertFalse(hasConnection);
+        }
 
-
-}
+///>>>>>>> b4351b9 (draft lesson 5)
+    }
