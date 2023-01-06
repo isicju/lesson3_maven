@@ -4,7 +4,6 @@ import java.util.List;
 
 public class ListService<E> {
     static final int HALF_LIST = 2;
-    static final int END_LIST = -1;
     static final int BEGGING_LIST = 0;
     private List<E> list;
     
