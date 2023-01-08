@@ -149,7 +149,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        org.example.App
+                                        org.example.online.MyHttpServer
                                     </mainClass>
                                 </manifest>
                             </archive>
