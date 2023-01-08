@@ -19,6 +19,7 @@ public class Main {
         UserApiService myInstance = UserApiService.getInstance();
         myInstance.getUsers();
         String stringContent =  DataUtil.getFileAsString("USER_DATA.json");
+        System.out.println(stringContent);
     }
 
 }

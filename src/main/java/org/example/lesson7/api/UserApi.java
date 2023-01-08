@@ -10,7 +10,6 @@ import java.util.List;
 
 public class UserApi {
     private static final UserApi instance = new UserApi();
-
     private List<User> users;
 
     private UserApi() {
@@ -19,7 +18,6 @@ public class UserApi {
 
     private List<User> initUsersFromJson() {
         Type listType = new TypeToken<ArrayList<User>>() {}.getType();
-
         String validJson = DataUtil.getFileAsString("USER_DATA.json");
         Gson gson = new Gson();
         return gson.fromJson(validJson, listType);

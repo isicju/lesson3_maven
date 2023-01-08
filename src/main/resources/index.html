@@ -1,36 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+    body {
+    background-color: #242224;
+    }
+    </style>
     <!--    maps dependencies -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
           integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
           crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
             integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-            crossorigin=""></script>
-
+            crossorigin="">
+    </script>
     <script src="myscripts.js"></script>
-
 </head>
+
 <body>
-<div style="padding-top: 20px">
-<!--add button that fires load coutries-->
-<!--    <button></button>-->
+<div>
+    <style type="text/css">
+  button[name="run_script"] {
+    border: none;
+    border-radius: 5px;
+    padding: 8px 8px;
+    background: #A9A9A9;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: black;
+  }
+  button[name="run_script"]:hover {
+    background: #DCDCDC;
+  }
+    </style>
+    <button type="button" name="run_script" onclick="loadCountries()">Click To Load Countries
+    </button>
+    <button type="button" name="run_script" onclick="showSelectedCity()">Click To Show city on the map
+    </button>
     <div>
-        <input id="currentCityNameId" list="Country" name="Country">
-        <datalist id="Country">
-        </datalist>
+        <input style="margin: 10px" id="currentCityNameId" list="Country" name="Country">
+
+        <datalist style="margin: 10px" id="Country"></datalist>
+
+        <div style="border: 1px solid #000; margin: 10px; height: 500px; width: 700px " id="map"></div>
     </div>
-
-<!--    add button that fires show selected city-->
-
 </div>
-
-<div style="height: 400px; width: 400px " id="map"></div>
-
 </div>
-
 </body>
 </html>
+
 
 
