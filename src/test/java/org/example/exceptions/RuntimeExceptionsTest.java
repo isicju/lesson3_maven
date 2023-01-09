@@ -14,5 +14,28 @@ public class RuntimeExceptionsTest extends DefaultTest {
                 () -> runtimeExceptions.throwsNullPointerException(),
                 "Had to trown an exception but it didn't"
         );
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> runtimeExceptions.throwsArrayIndexOutOfBoundsException(),
+                "Had to trown an exception but it didn't"
+        );
+
+        assertThrows(
+                NumberFormatException.class,
+                () -> runtimeExceptions.throwsNumberFormatException(),
+                "Had to trown an exception but it didn't"
+        );
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> runtimeExceptions.throwsIllegalArgumentException(),
+                "Had to trown an exception but it didn't"
+        );
+
+        assertThrows(
+                ClassCastException.class,
+                () -> runtimeExceptions.throwsClassCastException(),
+                "Had to trown an exception but it didn't"
+        );
     }
 }

@@ -4,9 +4,10 @@ import java.util.LinkedList;
 
 public class Errors {
 
-    static LinkedList<Object[]> listObj = new LinkedList<>();
+    static LinkedList<Object[]> listObj = null;
 
     public void throwsOOOException(){
+        listObj = new LinkedList<>();
         while (true)
         {
             listObj.add(new Object[100]);
