@@ -7,9 +7,20 @@ document.onreadystatechange = function () {
 
 function loadCountries() {
     //loading cities localhost:8500/cities
+    const Http = new XMLHttpRequest();
+    const url = 'http://localhost:8500/cities';
+    Http.open("GET", url);
+    Http.send();
     //parsing cities and adding them to citiesData
-
-
+    Http.onreadystatechange = (e) => {
+        if (Http.readyState === XMLHttpRequest.DONE) {
+            const cities = JSON.parse(Http.responseText);
+            for (let i = 0; i < cities.length; i++) {
+            citiesData[i] = [cities[i].country, cities[i].city, cities[i].latitude, cities[i].longitude];
+                addCityByName(cities[i].city);
+            }
+        }
+    }
 }
 
 function initFirstMapView() {
