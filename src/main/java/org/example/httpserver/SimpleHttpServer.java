@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
+import org.example.lesson7.api.CityApi;
 import org.example.lesson7.api.UserApi;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ import static org.example.utils.DataUtil.getFileAsByteArray;
 public class SimpleHttpServer {
 
     private static UserApi userApi = UserApi.getInstance();
+    private static CityApi cityApi = CityApi.getInstance();
 
     public static void main(String[] args) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(8500), 0);
@@ -26,7 +28,9 @@ public class SimpleHttpServer {
 
     private static void handleRequest(HttpExchange exchange) throws IOException {
         byte[] responseByteArray = null;
-        if (exchange.getRequestURI().getPath().contains("users")) {
+        if (exchange.getRequestURI().getPath().contains("cities")) {
+            responseByteArray = getCityData();
+        } else if (exchange.getRequestURI().getPath().contains("user")) {
             responseByteArray = getApiData();
         } else {
             responseByteArray = getStaticData(exchange);
@@ -37,6 +41,14 @@ public class SimpleHttpServer {
     private static byte[] getApiData() {
         return (new Gson().toJson(userApi.getAllUsers())).getBytes(StandardCharsets.UTF_8);
     }
+
+
+
+    private static byte[] getCityData() {
+        return (new Gson().toJson(cityApi.getHundredRandomCities())).getBytes(StandardCharsets.UTF_8);
+    }
+
+
 
     private static byte[] getStaticData(HttpExchange exchange) {
         String filePath = exchange.getRequestURI().getPath().replaceFirst("/", "");

@@ -8,7 +8,25 @@ document.onreadystatechange = function () {
 function loadCountries() {
     //loading cities localhost:8500/cities
     //parsing cities and adding them to citiesData
+    const url = 'http://localhost:8500/cities';
+    const Http = new XMLHttpRequest();
+    Http.open("GET", url);
+    Http.send();
 
+    Http.onreadystatechange = (e) => {
+        if (Http.readyState === XMLHttpRequest.DONE) {
+            let cities = JSON.parse(Http.responseText);
+            for (let i = 0; i < cities.length; i++) {
+                citiesData.push({
+                    country: cities[i].country,
+                    name: cities[i].name,
+                    latitude: cities[i].latitude,
+                    longitude: cities[i].longitude
+                })
+                addCityByName(cities[i].name);
+            }
+        }
+    }
 
 }
 
