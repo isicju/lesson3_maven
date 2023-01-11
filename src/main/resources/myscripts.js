@@ -23,7 +23,7 @@ function loadCountries() {
     }
 }
 
-function initFirstMapView() {
+function initFirstMapView() { //первый просмотр карты
     let map = L.map('map').setView([51.505, -0.09], 9);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19
@@ -47,7 +47,7 @@ function findCityDataByCityName(cityName) {
     return cityDataResult;
 }
 
-function resetMap() {
+function resetMap() { //сброс карты
     if (L.DomUtil.get('map')) {
         L.DomUtil.get('map')._leaflet_id = null;
     }

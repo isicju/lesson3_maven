@@ -12,27 +12,26 @@
     <script src="myscripts.js"></script>
 
 </head>
-<body>
-<div style="padding-top: 20px">
-<!--add button that fires load coutries-->
-<!--    <button></button>-->
-    <button onClick = "loadCountries()"> Click To Load Countries </button>
-    <div>
-        <input id="currentCityNameId" list="Country" name="Country">
-        <datalist id="Country">
-        </datalist>
-    </div>
+    <body>
+        <!--отступ от верха страницы-->
+        <div style="padding-top: 20px">
 
-<!--    add button that fires show selected city-->
-    <button onClick = "showSelectedCity()"> Click To Show city on the map </button>
+            <!--кнопка для загрузки городов-->
+            <button onClick = "loadCountries()"> Click To Load Countries </button>
 
-</div>
+                <div>
+                    <input id="currentCityNameId" list="Country" name="Country">
+                    <datalist id="Country"></datalist>
+                </div>
 
-<div style="height: 400px; width: 400px " id="map"></div>
+            <!--кнопка для показа города на карте-->
+            <button onClick = "showSelectedCity()"> Click To Show city on the map </button>
 
-</div>
 
-</body>
+            <div style="height: 800px; width: 1000px " id="map"></div>
+
+        </div>
+    </body>
 </html>
 
 
