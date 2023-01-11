@@ -39,7 +39,7 @@ function setMapLatitudeAndLongitude(latitude, longitude) {
 function findCityDataByCityName(cityName) {
     let cityDataResult = null;
     for (let cityData of citiesData){
-        if (cityData.name === cityName) {
+        if (cityData[1] === cityName) {
             cityDataResult = cityData;
             break;
         }
@@ -58,7 +58,7 @@ function showSelectedCity() {
     if (cityName) {
         const cityData = findCityDataByCityName(cityName)
         if (cityData) {
-            setMapLatitudeAndLongitude(cityData.latitude, cityData.longitude)
+            setMapLatitudeAndLongitude(cityData[2], cityData[3])
         }
     }
 }
