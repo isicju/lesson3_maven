@@ -19,6 +19,13 @@
     </properties>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/commons-validator/commons-validator -->
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.7</version>
+        </dependency>
+
 
         <dependency>
             <groupId>com.mailjet</groupId>
@@ -142,7 +149,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        org.example.httpserver.SimpleHttpServer
+                                        org.example.online.MyHttpServer
                                     </mainClass>
                                 </manifest>
                             </archive>
