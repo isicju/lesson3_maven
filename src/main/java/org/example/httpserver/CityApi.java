@@ -32,7 +32,7 @@ public class CityApi {
         
         List<City> rawCities = new ArrayList<>();
         for (String cityRecord : response.getBody().split("\n")) {
-            String name = cityRecord.split("\t")[0];
+            String name = cityRecord.split("\t")[1];
             String latitude = cityRecord.split("\t")[2];
             String longitude = cityRecord.split("\t")[3];
             rawCities.add(new City(name, latitude, longitude));

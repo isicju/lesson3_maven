@@ -5,12 +5,10 @@ import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
 import org.example.httpserver.CityApi;
 import org.example.lesson7.api.UserApi;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
-
 import static org.example.utils.DataUtil.getFileAsByteArray;
 
 class myHttpServer {
@@ -27,16 +25,12 @@ class myHttpServer {
     
     static void handleRequest(HttpExchange exchange) throws IOException {
         byte[] responseByteArray = null;
-        if (exchange.getRequestURI().getPath().contains("cities")) {
+        if (exchange.getRequestURI().getPath().contains("city")) {
             responseByteArray = City100RandomApi();
         } else {
             responseByteArray = getStaticData(exchange);
         }
         sendResponse(exchange, responseByteArray);
-    }
-    
-    private static byte[] getApiData() {
-        return (new Gson().toJson(userApi.getAllUsers())).getBytes(StandardCharsets.UTF_8);
     }
     
     private static byte[] City100RandomApi() {

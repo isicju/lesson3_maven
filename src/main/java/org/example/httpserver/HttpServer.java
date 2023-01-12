@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
 import org.example.lesson7.api.UserApi;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
@@ -26,7 +25,7 @@ public class HttpServer {
     
     public static void handleRequest(HttpExchange exchange) throws IOException {
         byte[] responseByteArray = null;
-        if (exchange.getRequestURI().getPath().contains("cities")) {
+        if (exchange.getRequestURI().getPath().contains("city")) {
             responseByteArray = City100RandomApi();
         } else {
             responseByteArray = getStaticData(exchange);

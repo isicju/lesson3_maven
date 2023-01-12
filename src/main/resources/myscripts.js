@@ -7,7 +7,7 @@ document.onreadystatechange = function () {
 
 function loadCountries() {
 const Http = new XMLHttpRequest();
-const url = 'http://localhost:8500/cities';
+const url = 'http://localhost:8500/city';
 Http.open("GET", url);
 Http.send();
 
